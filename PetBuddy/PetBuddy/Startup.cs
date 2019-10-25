@@ -46,6 +46,7 @@ namespace PetBuddy
                     builder.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
 
+            services.BuildServiceProvider().GetService<ApplicationContext>().Database.Migrate();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
