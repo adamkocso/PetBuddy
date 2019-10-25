@@ -1,0 +1,21 @@
+@model EditProfileViewModel
+
+<div>
+    <h2>@Model.User.UserName + "'s settings"</h2>
+    <form asp-controller="Profile" asp-action="">
+        <div>
+            <label asp-for="@Model.User.UserName"></label>
+            <input asp-for="@Model.User.UserName"/>
+        </div>
+        <div>
+            <label asp-for="@Model.User.City"></label>
+            <input asp-for="@Model.User.City"/>
+            <span asp-validation-for="@Model.User.City"></span>
+        </div>
+        @* Ityu itt majd kepcseree pliiiz!!!! koszikeeeee *@
+        @* <div> *@
+        @*     <label asp-for="@Model.User.UserUri"></label> *@
+        @*     <input asp-for="@Model.User.UserUri"/> *@
+        @* </div> *@
+    </form>
+</div>

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Services
 {
@@ -13,6 +15,7 @@ namespace PetBuddy.Services
         private readonly ApplicationContext applicationContext;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private IUserService _userServiceImplementation;
 
         public UserService(ApplicationContext applicationContext, UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -55,6 +58,14 @@ namespace PetBuddy.Services
             var result = await userManager.CreateAsync(user, model.Password);
 
             return result;
+        }
+
+        public async Task SaveUserSettings(EditProfileViewModel editProfileViewModel)
+        {
+            var user = await applicationContext.Users.SingleOrDefaultAsync(p => p.Id == editProfileViewModel.User.Id);
+            user.City = editProfileViewModel.User.City;
+            user.UserName = editProfileViewModel.User.UserName;
+            await applicationContext.SaveChangesAsync();
         }
     }
 }

@@ -12,7 +12,6 @@ namespace PetBuddy.Controllers.HomeController
         private readonly IHomeService homeService;
         private readonly UserManager<User> userManager;
 
-
         public HomeController(IHomeService homeService, UserManager<User> userManager)
         {
             this.homeService = homeService;
@@ -20,7 +19,7 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpGet("/")]
-        public async Task<IActionResult> Home()
+        public  IActionResult Home()
         {
             var places = homeService.FindAllPlacesAsync();
             return View(new HomeViewModel {Places =  places} );
