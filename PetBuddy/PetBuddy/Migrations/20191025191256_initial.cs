@@ -43,7 +43,7 @@ namespace PetBuddy.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     UserUri = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    placeId = table.Column<long>(nullable: false)
+                    PlaceId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,10 +56,12 @@ namespace PetBuddy.Migrations
                 {
                     PlaceId = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     AverageRating = table.Column<double>(nullable: false),
                     PlaceUri = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -241,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "69eb98f0-cd75-4c89-802d-b36ec6b80317", "6b76bd81-e887-4c07-b929-5f9ecf300469", "Admin", "ADMIN" });
+                values: new object[] { "336f9771-ab00-4b06-a59a-fae373b4bb67", "3e6cf8a7-c38d-4ec0-bcf1-d2d18dcbf54e", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0e84fe7a-1d13-4be4-a77b-a7564678b3c3", "fe4a6827-0c6f-47d8-a13d-5108a0dd1be5", "Guest", "GUEST" });
+                values: new object[] { "e5853170-6aaa-428f-8983-a4b53584410c", "65420775-2d62-4f30-b350-e9b46774737a", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

@@ -9,7 +9,7 @@ using PetBuddy;
 namespace PetBuddy.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191025150555_initial")]
+    [Migration("20191025191256_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69eb98f0-cd75-4c89-802d-b36ec6b80317",
-                            ConcurrencyStamp = "6b76bd81-e887-4c07-b929-5f9ecf300469",
+                            Id = "336f9771-ab00-4b06-a59a-fae373b4bb67",
+                            ConcurrencyStamp = "3e6cf8a7-c38d-4ec0-bcf1-d2d18dcbf54e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0e84fe7a-1d13-4be4-a77b-a7564678b3c3",
-                            ConcurrencyStamp = "fe4a6827-0c6f-47d8-a13d-5108a0dd1be5",
+                            Id = "e5853170-6aaa-428f-8983-a4b53584410c",
+                            ConcurrencyStamp = "65420775-2d62-4f30-b350-e9b46774737a",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -189,6 +189,10 @@ namespace PetBuddy.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
                     b.Property<string>("PlaceUri");
 
                     b.Property<int>("Price");
@@ -253,6 +257,8 @@ namespace PetBuddy.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<long>("PlaceId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -261,8 +267,6 @@ namespace PetBuddy.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("UserUri");
-
-                    b.Property<long>("placeId");
 
                     b.HasKey("Id");
 

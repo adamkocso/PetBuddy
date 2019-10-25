@@ -46,8 +46,16 @@ namespace PetBuddy
                     builder.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
 
+
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IBlobService, BlobService>();
+            services.AddTransient<IPlaceService, PlaceService>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+            });
             services.AddMvc();
         }
 
@@ -60,7 +68,8 @@ namespace PetBuddy
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc();
         }
