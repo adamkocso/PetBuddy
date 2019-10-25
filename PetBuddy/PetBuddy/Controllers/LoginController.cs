@@ -8,7 +8,13 @@ namespace PetBuddy.Controllers
 {
     public class LoginController : Controller
     {
-        [HttpGet("/")]
+        [HttpGet("/login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("/login")]
         public IActionResult Login()
         {
             return View();
