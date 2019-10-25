@@ -78,8 +78,6 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-           
-
             return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri });
         }
 
@@ -100,9 +98,7 @@ namespace PetBuddy.Controllers.Place
                 //    await imageService.UploadAsync(editPlace.PlaceUri, placeId);
                 //    await placeService.SetIndexImageAsync(placelId);
                 //}
-
-
-                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+            return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
             }
            
             return View(editPlace);
