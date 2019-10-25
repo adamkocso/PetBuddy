@@ -11,6 +11,6 @@ namespace PetBuddy.Models
         public string UserUri { get; set; }
         public string City { get; set; }
         public List<Pet> Pets { get; set; }
-        public long placeId { get; set; }
+        public long PlaceId { get; set; }
     }
 }
