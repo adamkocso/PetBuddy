@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
+using PetBuddy.Services;
+using PetBuddy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +12,18 @@ namespace PetBuddy.Controllers.HomeController
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<User> userManager;
+        private readonly IHomeService homeService;
 
-        public HomeController(UserManager<User> userManager)
+        public HomeController(IHomeService homeService)
         {
-            this.userManager = userManager;
+            this.homeService = homeService;
         }
 
         [HttpGet("/")]
         public async Task<IActionResult> Home()
         {
-            return View();
+            var places = homeService.FindAllPlacesAsync();
+            return View(new HomeViewModel { Places = places });
         }
     }
 }
