@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetBuddy.Migrations
 {
-    public partial class petbudy : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,10 +56,12 @@ namespace PetBuddy.Migrations
                 {
                     PlaceId = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     AverageRating = table.Column<double>(nullable: false),
                     PlaceUri = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -241,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3968dfe6-f53f-4231-a5ad-b8c7a84e59ed", "8b62e84b-9184-407a-ab55-f9a999c8f0b0", "Admin", "ADMIN" });
+                values: new object[] { "b6ab37e0-39d4-414d-936a-be2a78ff1a38", "61acab37-4705-4aaf-84ec-5712b3e00543", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a24b7433-3e81-441d-b844-cad5159ec57e", "b0d47f3a-f44c-4e6e-a906-a294dbc3b895", "Guest", "GUEST" });
+                values: new object[] { "6b45e781-fa8f-4464-b4df-0c2c3bce7073", "6735e17e-e8a4-4782-8777-b494f8044547", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

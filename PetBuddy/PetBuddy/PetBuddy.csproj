@@ -14,9 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Message\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Place\" />
+    <Folder Include="Views\Message\" />
     <Folder Include="Views\User\" />
     <Folder Include="Views\Pet\" />
   </ItemGroup>

@@ -42,15 +42,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3968dfe6-f53f-4231-a5ad-b8c7a84e59ed",
-                            ConcurrencyStamp = "8b62e84b-9184-407a-ab55-f9a999c8f0b0",
+                            Id = "b6ab37e0-39d4-414d-936a-be2a78ff1a38",
+                            ConcurrencyStamp = "61acab37-4705-4aaf-84ec-5712b3e00543",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a24b7433-3e81-441d-b844-cad5159ec57e",
-                            ConcurrencyStamp = "b0d47f3a-f44c-4e6e-a906-a294dbc3b895",
+                            Id = "6b45e781-fa8f-4464-b4df-0c2c3bce7073",
+                            ConcurrencyStamp = "6735e17e-e8a4-4782-8777-b494f8044547",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -186,6 +186,10 @@ namespace PetBuddy.Migrations
                     b.Property<double>("AverageRating");
 
                     b.Property<string>("City");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("PlaceUri");
 

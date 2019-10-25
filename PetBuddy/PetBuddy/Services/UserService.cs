@@ -54,7 +54,18 @@ namespace PetBuddy.Services
             var user = new User {UserName = model.Username, Email = model.Email };
             var result = await userManager.CreateAsync(user, model.Password);
 
+            if (result.Succeeded)
+            {
+                await AddUserToRoleAsync(user);
+                return result;
+            }
+
             return result;
+        }
+
+        public async Task AddUserToRoleAsync(User user)
+        {
+            await userManager.AddToRoleAsync(user, "Guest");
         }
     }
 }
