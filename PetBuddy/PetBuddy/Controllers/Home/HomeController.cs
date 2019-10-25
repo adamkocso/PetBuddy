@@ -13,6 +13,7 @@ namespace PetBuddy.Controllers.HomeController
     public class HomeController : Controller
     {
         private readonly IHomeService homeService;
+        private readonly IUserService userService;
 
         public HomeController(IHomeService homeService)
         {
@@ -24,6 +25,12 @@ namespace PetBuddy.Controllers.HomeController
         {
             var places = homeService.FindAllPlacesAsync();
             return View(new HomeViewModel { Places = places });
+        }
+        [HttpPost("/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await userService.Logout();
+            return RedirectToAction(nameof(LoginController.Login), "Login");
         }
     }
 }
