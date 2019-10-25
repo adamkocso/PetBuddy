@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
 using PetBuddy.Viewmodels;
 
-namespace PetBuddy.Controllers
+namespace PetBuddy.Controllers.HomeController
 {
     public class LoginController : Controller
     {
@@ -35,7 +35,7 @@ namespace PetBuddy.Controllers
                 var errors = await userService.LoginAsync(model);
                 if (errors.Count == 0)
                 {
-                    return RedirectToAction(nameof(HomeController.HomeController), "Home");
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
 
                 model.ErrorMessages = errors;

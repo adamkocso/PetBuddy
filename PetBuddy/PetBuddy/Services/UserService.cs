@@ -51,7 +51,7 @@ namespace PetBuddy.Services
         }
         public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
         {
-            var user = new User {Email = model.Email };
+            var user = new User {UserName = model.Username, Email = model.Email };
             var result = await userManager.CreateAsync(user, model.Password);
 
             return result;

@@ -1,4 +1,5 @@
-﻿
+﻿@model PetBuddy.Viewmodels.RegisterViewModel
+
 @{
     ViewData["Title"] = "Register";
 }
@@ -28,14 +29,6 @@
                 <label asp-for="ConfirmPassword"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div>
-                    <div>
-                        <label asp-for="IsManager"></label>
-                    </div>
-                    &nbsp<input asp-for="IsManager" type="checkbox" name="IsManager" value=true />&nbsp "Yes, I am"
-                </div>
             </div>
             <button type="submit" class="btn btn-outline-info">"Register"</button>
         </form>

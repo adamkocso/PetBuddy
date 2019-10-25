@@ -15,6 +15,12 @@ namespace PetBuddy.Viewmodels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "The Username field is required.")]
+        [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+           MinimumLength = 3)]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
         [Required(ErrorMessage = "The Password field is required.")]
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
             MinimumLength = 6)]
