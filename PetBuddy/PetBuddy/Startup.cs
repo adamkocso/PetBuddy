@@ -27,6 +27,14 @@ namespace PetBuddy
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<ApplicationContext>(options =>
@@ -38,21 +46,27 @@ namespace PetBuddy
                     builder.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
 
+
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IBlobService, BlobService>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+            });
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager)
         {
-            Admin.CreateAdmin(userManager);
+            Administrator.CreateAdmin(userManager);
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseStaticFiles();
             app.UseMvc();
         }
