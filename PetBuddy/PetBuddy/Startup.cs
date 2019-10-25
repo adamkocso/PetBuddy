@@ -51,6 +51,7 @@ namespace PetBuddy
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IBlobService, BlobService>();
+            services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IHomeService, HomeService>();
             services.Configure<IdentityOptions>(options =>
             {
@@ -69,6 +70,8 @@ namespace PetBuddy
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc();
         }

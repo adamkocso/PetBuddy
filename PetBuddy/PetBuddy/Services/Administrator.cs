@@ -19,7 +19,7 @@ namespace PetBuddy.Services
                     Email = "admin@gmail.com"
                 };
 
-                IdentityResult check = userManager.CreateAsync(user, "Password123..").Result;
+                IdentityResult check = userManager.CreateAsync(user, "Password1234..").Result;
 
                 if (check.Succeeded)
                 {

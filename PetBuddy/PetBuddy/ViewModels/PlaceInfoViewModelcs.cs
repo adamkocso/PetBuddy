@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.ViewModels
 {
-    public class PlaceInfoViewModel
+    public class PlaceInfoViewModelcs
     {
+        public User User { get; set; }
+        public Place Place { get; set; }
+        public Review Review { get; set; }
         [Required(ErrorMessage = "The City field is required.")]
         public string City { get; set; }
         [Required(ErrorMessage = "The Price field is required.")]

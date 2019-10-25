@@ -23,6 +23,22 @@ namespace PetBuddy.Controllers.Place
             this.imageService = imageService;
             this.userManager = userManager;
         }
+        [AllowAnonymous]
+        [HttpGet("/placeInfo")]
+        public async Task<IActionResult> PlaceInfo()
+        {
+            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            if (currentUser.PlaceId != 0)
+            {
+                var place = await placeService.FindPlaceByIdAsync(currentUser.PlaceId);
+
+                return View(new PlaceInfoViewModel
+                { User = currentUser, Place = place });
+            }
+
+            return View(new PlaceInfoViewModel
+            { User = currentUser });
+        }
 
         [HttpGet("/addplace")]
         public IActionResult Add()
@@ -38,7 +54,8 @@ namespace PetBuddy.Controllers.Place
             if (ModelState.IsValid)
             {
                 var currentUser = await userManager.GetUserAsync(HttpContext.User);
-                await placeService.AddPlaceAsync(newPlace, currentUser.Id);
+                await placeService.AddPlaceAsync(newPlace, currentUser);
+
                 //    if (newPlace.PlaceUri != null)
                 //    {
                 //        //    var errors = imageService.Validate(newPlace.PlaceUri, newPlace);
@@ -51,7 +68,7 @@ namespace PetBuddy.Controllers.Place
                 //        //await placeService.SetIndexImageAsync(placeId);
                 //        //}
 
-                return RedirectToAction(nameof(PlaceC), "Place");
+                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
             }
 
             return View(newPlace);
