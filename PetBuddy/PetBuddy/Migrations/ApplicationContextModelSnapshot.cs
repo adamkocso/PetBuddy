@@ -42,15 +42,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69eb98f0-cd75-4c89-802d-b36ec6b80317",
-                            ConcurrencyStamp = "6b76bd81-e887-4c07-b929-5f9ecf300469",
+                            Id = "0b2dfb8a-cb82-41f6-b966-91a6dc545fe5",
+                            ConcurrencyStamp = "f32247fd-0e8b-47a4-a069-e99578a8e509",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0e84fe7a-1d13-4be4-a77b-a7564678b3c3",
-                            ConcurrencyStamp = "fe4a6827-0c6f-47d8-a13d-5108a0dd1be5",
+                            Id = "aa5b5d95-ea29-4f0b-bf47-c12fb62fede7",
+                            ConcurrencyStamp = "0a878656-e9b3-469c-8a1f-a63b8cf6e891",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -251,6 +251,8 @@ namespace PetBuddy.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<long>("PlaceId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -259,8 +261,6 @@ namespace PetBuddy.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("UserUri");
-
-                    b.Property<long>("placeId");
 
                     b.HasKey("Id");
 
