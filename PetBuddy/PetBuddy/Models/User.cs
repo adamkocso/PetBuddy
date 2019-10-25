@@ -8,5 +8,9 @@ namespace PetBuddy.Models
 {
     public class User:IdentityUser
     {
+        public string UserUri { get; set; }
+        public string City { get; set; }
+        public List<Pet> Pets { get; set; }
+        public long placeId { get; set; }
     }
 }
