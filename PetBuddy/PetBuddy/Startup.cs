@@ -61,7 +61,7 @@ namespace PetBuddy
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager)
         {
-            Admin.CreateAdmin(userManager);
+            Administrator.CreateAdmin(userManager);
 
             if (env.IsDevelopment())
             {
