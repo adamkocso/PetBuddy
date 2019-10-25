@@ -9,7 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+<<<<<<< HEAD
 using PetBuddy.Models;
+=======
+>>>>>>> b8fdf36118d5d47c79b3b7e69ac7863f3004e234
 using PetBuddy.Services;
 
 namespace PetBuddy
@@ -37,6 +40,10 @@ namespace PetBuddy
                 services.AddDbContext<ApplicationContext>(builder =>
                     builder.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
+
+            services.AddTransient<IPetService, PetService>();
+            services.AddTransient<IPlaceService, PlaceService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddMvc();
         }
 
