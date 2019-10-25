@@ -6,6 +6,7 @@ namespace PetBuddy.Models
     public class Place
     {
         public long PlaceId { get; set; }
+        public string Name { get; set; }
         public string City { get; set; }
         public List<AnimalType> Animals{ get; set; }
         public int Price { get; set; }
