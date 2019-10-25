@@ -10,6 +10,7 @@ namespace PetBuddy.Models
         public List<AnimalType> Animals{ get; set; }
         public int Price { get; set; }
         public double AverageRating { get; set; }
+        public string Description { get; set; }
         public string PlaceUri { get; set; }
         public List<Review> Reviews { get; set; }
         public string UserId { get; set; }
