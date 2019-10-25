@@ -69,6 +69,8 @@ namespace PetBuddy
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc();
         }
