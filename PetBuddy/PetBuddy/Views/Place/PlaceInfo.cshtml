@@ -27,12 +27,12 @@ else
             <h5>Description: </h5>
             <p>@Model.Place.Description</p>
         </div>
-        <form asp-controller="Place" asp-action="EditPlace" asp-route-HotelId="@Model.Place.PlaceId" method="get" class="my-btn">
+        <form asp-controller="Place" asp-action="Edit" asp-route-placeId="@Model.Place.PlaceId" method="get" class="my-btn">
             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
         </form>
         <div>
             <div>
-                <form asp-controller="Place" asp-action="PlaceInfo" asp-route-hotelId="@Model.Place.PlaceId" method="post">
+                <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@Model.Place.PlaceId" method="post">
                     <div class="form-group">
                         <label asp-for="@Model.Review.Rating"></label>
                         <select type="text" asp-for="@Model.Review.Rating">

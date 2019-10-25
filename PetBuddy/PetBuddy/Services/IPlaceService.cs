@@ -7,6 +7,7 @@ namespace PetBuddy.Services
     public interface IPlaceService
     {
         Task AddPlaceAsync(PlaceInfoViewModel newPlace, User user);
-        Task<Place> FindPlaceByIdAsync(long placeId);    
+        Task<Place> FindPlaceByIdAsync(long placeId);
+        Task EditPlaceAsync(long placeId, PlaceInfoViewModel editPlace);
     }
 }
