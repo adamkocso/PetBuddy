@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Home
 {
@@ -15,8 +16,8 @@ namespace PetBuddy.Controllers.Home
         [HttpGet("/")]
         public IActionResult Home()
         {
-            
-            return View();
+            var places = homeService.FindAllPlacesAsync();
+            return View(new HomeViewModel {Places =  places} );
         }
     }
 }
