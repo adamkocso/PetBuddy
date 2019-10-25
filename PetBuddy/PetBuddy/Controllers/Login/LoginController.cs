@@ -35,7 +35,7 @@ namespace PetBuddy.Controllers.HomeController
                 var errors = await userService.LoginAsync(model);
                 if (errors.Count == 0)
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(nameof(HomeController.Home), "Home");
                 }
 
                 model.ErrorMessages = errors;

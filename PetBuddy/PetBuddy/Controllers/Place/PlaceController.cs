@@ -51,7 +51,7 @@ namespace PetBuddy.Controllers.Place
                 //        //await placeService.SetIndexImageAsync(placeId);
                 //        //}
 
-                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+                return RedirectToAction(nameof(PlaceC), "Place");
             }
 
             return View(newPlace);
