@@ -9,7 +9,7 @@ namespace PetBuddy.Services
     public interface IImageService
     {
         List<string> Validate(IFormFileCollection files);
-        Task UploadAsync(IFormFileCollection files, long Id);
+        Task UploadAsync(IFormFileCollection files, long Id, string blobContainerName);
 
     }
 }
