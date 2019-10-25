@@ -25,7 +25,7 @@ namespace PetBuddy
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
