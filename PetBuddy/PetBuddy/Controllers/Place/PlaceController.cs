@@ -8,24 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
 using PetBuddy.Services;
 using PetBuddy.ViewModels;
-using Microsoft.AspNetCore.Http;
 
 namespace PetBuddy.Controllers.Place
 {
-    [AllowAnonymous]
     public class PlaceController : Controller
     {
-        private readonly UserManager<User> userManager;
-        private readonly IImageService imageService;
         private readonly IPlaceService placeService;
+        private readonly IImageService imageService;
+        private readonly UserManager<User> userManager;
 
-        public PlaceController(UserManager<User> userManager, IImageService imageService, IPlaceService placeService)
+        public PlaceController(IPlaceService placeService, IImageService imageService, UserManager<User> userManager)
         {
-            this.userManager = userManager;
-            this.imageService = imageService;
             this.placeService = placeService;
+            this.imageService = imageService;
+            this.userManager = userManager;
         }
-
         [AllowAnonymous]
         [HttpGet("/placeInfo")]
         public async Task<IActionResult> PlaceInfo()
@@ -38,9 +35,43 @@ namespace PetBuddy.Controllers.Place
                 return View(new PlaceInfoViewModel
                 { User = currentUser, Place = place });
             }
-            
+
             return View(new PlaceInfoViewModel
-                { User = currentUser });
+            { User = currentUser });
+        }
+
+        [HttpGet("/addplace")]
+        public IActionResult Add()
+        {
+
+            return View(new PlaceInfoViewModel());
+        }
+
+        [Authorize(Roles = "Guest, Admin")]
+        [HttpPost("/addplace")]
+        public async Task<IActionResult> Add(PlaceInfoViewModel newPlace)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await userManager.GetUserAsync(HttpContext.User);
+                await placeService.AddPlaceAsync(newPlace, currentUser);
+
+                //    if (newPlace.PlaceUri != null)
+                //    {
+                //        //    var errors = imageService.Validate(newPlace.PlaceUri, newPlace);
+                //        //    if (errors.Count != 0)
+                //        //    {
+                //        //        return View(newPlace);
+                //        //    }
+
+                //        //    await imageService.UploadAsync(newPlace.PlaceUri, placeId);
+                //        //await placeService.SetIndexImageAsync(placeId);
+                //        //}
+
+                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+            }
+
+            return View(newPlace);
         }
     }
 }

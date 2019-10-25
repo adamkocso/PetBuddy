@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetBuddy.Migrations
 {
-    public partial class initial : Migration
+    public partial class @as : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,8 +60,8 @@ namespace PetBuddy.Migrations
                     City = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     AverageRating = table.Column<double>(nullable: false),
-                    PlaceUri = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    PlaceUri = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -243,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b6ab37e0-39d4-414d-936a-be2a78ff1a38", "61acab37-4705-4aaf-84ec-5712b3e00543", "Admin", "ADMIN" });
+                values: new object[] { "00264f9a-18e5-4f7e-b6f8-434dbac00162", "acb16d45-f9c8-4739-ae83-9efbde352c32", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "6b45e781-fa8f-4464-b4df-0c2c3bce7073", "6735e17e-e8a4-4782-8777-b494f8044547", "Guest", "GUEST" });
+                values: new object[] { "955918a7-0b65-472f-88eb-a1de64b97769", "8c4e733c-3260-4752-a2bd-c7f94df217dd", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

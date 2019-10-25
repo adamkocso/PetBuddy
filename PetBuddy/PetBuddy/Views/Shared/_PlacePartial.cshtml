@@ -1,0 +1,45 @@
+﻿@model PlaceInfoViewModel
+
+<form asp-controller="Place" asp-action="@ViewData["Action"]" method="post" >
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="@Model.Price">Price</label>
+            <input type="text" asp-for="@Model.Price" class="form-control">
+            <span asp-validation-for="@Model.Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.City">City</label>
+            <input type="text" asp-for="@Model.City" class="form-control">
+            <span asp-validation-for="@Model.City" class="text-danger"></span>
+        </div>
+        @*<div class="form-group">
+            <label asp-for="@Model.Pets">"Pets"</label>
+            <input type="text" asp-for="@Model.Pets" class="form-control">
+            <span asp-validation-for="@Model.Pets" class="text-danger"></span>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="@Model.Description">Description</label>
+            <input type="text" asp-for="@Model.Description" class="form-control">
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @if (Model.ErrorMessages != null)
+    {
+        @foreach (var error in Model.ErrorMessages)
+        {
+            <span class="text-danger">@error</span>
+        }
+    }
+    <div>
+        <input type="file" asp-for="@Model.PlaceUri" multiple />
+    </div>
+    <div>
+        <span asp-validation-for="@Model.PlaceUri" class="text-danger"></span>
+    </div>
+</div>
+    <button type="submit" class="btn btn-primary btn-sm">@ViewData["Action"]</button>
+    <a class="btn btn-danger btn-sm" asp-controller="Place" asp-action="PlaceInfo" role="button">"Cancel"</a>
+    </form>

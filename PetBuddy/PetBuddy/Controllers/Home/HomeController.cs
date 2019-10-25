@@ -20,7 +20,7 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpGet("/")]
-        public async Task<IActionResult> Home()
+        public IActionResult Home()
         {
             var places = homeService.FindAllPlacesAsync();
             return View(new HomeViewModel { Places = places });
