@@ -18,7 +18,7 @@
     </form>
     @if (Model != null)
     {
-        @foreach (var user in Model.PagingList)
+        @foreach (var user in Model.List)
         {
             <div class="card mb-10 hotel-card">
                 <div class="row no-gutters">
@@ -27,20 +27,22 @@
                             <h5 class="card-title">
                                 @Html.DisplayFor(modelItem => user.UserName + "'s place")
                             </h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => user.City)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => user.Place.AnimalType)</p>
                             @if (user.Place.Price == 0)
                             {
                                 <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
                             }
                             else
                             {
-                                <p class="card-text">@Html.DisplayFor(modelItem => user.Place.Price) <span>Ft</span></p>
+                                <p class="card-text">@Html.DisplayFor(modelItem => user.Place.Price)<span>$</span></p>
                             }
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card-body">
-                            <form asp-controller="Hotel" asp-action="HotelInfo" asp-route-HotelId="@hotel.HotelId" method="get">
-                                <button type="submit" class="btn btn-primary">@localizer["More Info"]</button>
+                            <form asp-controller="" asp-action="" method="get">
+                                <button type="submit" class="btn btn-primary">See more</button>
                             </form>
                         </div>
                     </div>
@@ -48,5 +50,4 @@
             </div>
         }
     }
-                    
 </div>
