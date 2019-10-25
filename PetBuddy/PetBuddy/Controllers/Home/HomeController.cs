@@ -18,9 +18,8 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpGet("/")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Home()
         {
-            var currentUser =await userManager.GetUserAsync(HttpContext.User);
             return View();
         }
     }

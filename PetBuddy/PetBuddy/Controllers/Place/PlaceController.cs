@@ -42,11 +42,5 @@ namespace PetBuddy.Controllers.Place
             return View(new PlaceInfoViewModel
                 { User = currentUser });
         }
-
-        [HttpGet("/addplace")]
-        public IActionResult AddPlace()
-        {
-            return View();
-        }
     }
 }

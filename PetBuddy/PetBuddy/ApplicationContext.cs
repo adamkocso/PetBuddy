@@ -12,6 +12,7 @@ namespace PetBuddy
         public DbSet<Review> Reviews { get; set; }
         public new DbSet<User> Users { get; set; }
         public DbSet<AnimalType> AnimalTypes { get; set; }
+
         public ApplicationContext(DbContextOptions options) : base(options)
         {
         }
