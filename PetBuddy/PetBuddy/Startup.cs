@@ -46,16 +46,24 @@ namespace PetBuddy
                     builder.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
 
+            services.BuildServiceProvider().GetService<ApplicationContext>().Database.Migrate();
+
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IBlobService, BlobService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+            });
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager)
         {
-            Admin.CreateAdmin(userManager);
+            Administrator.CreateAdmin(userManager);
 
             if (env.IsDevelopment())
             {

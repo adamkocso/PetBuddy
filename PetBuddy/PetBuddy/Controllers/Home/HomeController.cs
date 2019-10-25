@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
 using PetBuddy.ViewModels;
 
-namespace PetBuddy.Controllers.Home
+namespace PetBuddy.Controllers.HomeController
 {
     public class HomeController : Controller
     {

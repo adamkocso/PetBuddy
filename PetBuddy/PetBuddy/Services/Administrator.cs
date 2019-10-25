@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.Services
 {
-    public class Admin
+    public class Administrator
     {
         public static void CreateAdmin(UserManager<User> userManager)
         {
@@ -16,7 +16,7 @@ namespace PetBuddy.Services
                 User user = new User
                 {
                     UserName = "Admin",
-                    Email = "admin&gmail.com"
+                    Email = "admin@gmail.com"
                 };
 
                 IdentityResult check = userManager.CreateAsync(user, "Password123..").Result;
