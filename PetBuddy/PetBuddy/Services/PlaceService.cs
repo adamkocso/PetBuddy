@@ -28,6 +28,20 @@ namespace PetBuddy.Services
             await applicationContext.SaveChangesAsync();
         }
 
+        public async Task EditPlaceAsync(long placeId, PlaceInfoViewModel editPlace)
+        {
+            var placeEdit = await FindPlaceByIdAsync(placeId);
+            if(placeEdit != null)
+            {
+                placeEdit.Price = editPlace.Price;
+                placeEdit.City = editPlace.City;
+                placeEdit.Description = editPlace.Description;
+                placeEdit.PlaceUri = editPlace.PlaceUri;
+                //placeEdit.Animals = editPlace.Animals;
+                applicationContext.Places.Update(placeEdit);
+                await applicationContext.SaveChangesAsync();
+            }
+        }
         public async Task<Place> FindPlaceByIdAsync(long placeId)
         {
             var foundPlace = await applicationContext.Places.Include(p => p.Animals).Include(p => p.Reviews)
