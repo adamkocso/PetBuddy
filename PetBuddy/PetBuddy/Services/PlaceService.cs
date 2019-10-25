@@ -18,7 +18,6 @@ namespace PetBuddy.Services
 
         public async Task AddPlaceAsync(PlaceInfoViewModel newPlace, User user)
         {
-           
             var city = newPlace.City;
             var description = newPlace.Description;
             var price = newPlace.Price;
@@ -27,7 +26,6 @@ namespace PetBuddy.Services
             await applicationContext.SaveChangesAsync();
             user.PlaceId = place.Entity.PlaceId;
             await applicationContext.SaveChangesAsync();
-
         }
 
         public async Task<Place> FindPlaceByIdAsync(long placeId)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.ViewModels
 {
-    public class PlaceInfoViewModelcs
+    public class PlaceInfoViewModel
     {
         public User User { get; set; }
         public Place Place { get; set; }
