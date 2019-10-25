@@ -1,17 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using PetBuddy.Services;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.HomeController
 {
     public class HomeController : Controller
     {
-        [HttpGet("/")]
-        public IActionResult Index()
+        private readonly IHomeService homeService;
+
+        public HomeController(IHomeService homeService)
         {
-            return View();
+            this.homeService = homeService;
+        }
+
+        [HttpGet("/")]
+        public IActionResult Home()
+        {
+            var places = homeService.FindAllPlacesAsync();
+            return View(new HomeViewModel {Places =  places} );
         }
     }
 }

@@ -1,0 +1,82 @@
+@model PetBuddy.ViewModels.HomeViewModel
+
+<div>
+    
+    <form asp-controller="Home" asp-action="Home" method="get">
+        <h4>Find the best person for your darling:</h4>
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div>
+                    <label asp-for="@Model.QueryParams.City">City</label>
+                    <select asp-for="@Model.QueryParams.City">
+                        @foreach (var city in Model.Places)
+                        {
+                            <options>@city.City</options>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            @* ez meg itt nem mukodik majd ha kesz a many to many kapcsi :) <3  *@
+            @* a tobbi se tudom meg, hogy fog-e mukodni :'D  *@
+            @* *@
+            @* *@
+             @* <div class="form-group col-md-4"> *@
+            @*         <div> *@
+            @*             <label asp-for="Type">Your pet's type</label> *@
+            @*             <select asp-for=""> *@
+            @*                 @foreach (var type in Model.Places) *@
+            @*                 { *@
+            @*                     <options value="@type.">Ide jon majd az animal type!!</options> *@
+            @*                 } *@
+            @*             </select> *@
+            @*         </div> *@
+            @* </div> *@
+            <div class="form-group col-md-2">
+                <div>
+                    <label asp-for="@Model.QueryParams.Price">Price/day/animal</label>
+                    <input asp-for="@Model.QueryParams.Price"/>
+                </div>
+            </div>
+            </div>
+            <button type="submit">Search</button>
+    </form>
+   
+    @if (Model != null)
+    {
+        @foreach (var place in Model.Places)
+        {
+            <div class="card mb-10 hotel-card">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.DisplayFor(modelItem => place.UserId + "'s place")
+                            </h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
+                            @foreach (var animaltype in place.Animals)
+                            {
+                                <p class="card-text">@animaltype</p>
+                            }
+                            @if (place.Price == 0)
+                            {
+                                <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
+                            }
+                            else
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <form asp-controller="" asp-action="" method="get">
+                                <button type="submit" class="btn btn-primary">See more</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
