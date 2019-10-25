@@ -11,4 +11,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Message\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Place\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="Views\Register\" />
+    <Folder Include="Views\Pet\" />
+  </ItemGroup>
+
 </Project>
