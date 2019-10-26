@@ -80,7 +80,7 @@
                                         <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
                                     }
                                     <div class="menu-button">
-                                        <form>
+                                        <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
                                             <button type="submit" class="btn btn-success">See More</button>
                                         </form>
                                     </div>

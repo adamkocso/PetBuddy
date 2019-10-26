@@ -1,27 +1,30 @@
 ﻿@model PetViewModel
 
-<form asp-controller="Pet" asp-action="@ViewData["Action"]" method="post">
-    <div>
-        <label asp-for="PetName"></label>
-        <input type="text" asp-for="PetName"/>
-        <span asp-validation-for="PetName" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="PetType"></label>
-        <select type="text" asp-for="PetType">
-            <option value="dog">dog</option>
-            <option value="cat">cat</option>
-            <option value="rabbit">rabbit</option>
-            <option value="snake">snake</option>
-            <option value="ferret">ferret</option>
-        </select>
-    </div>
-    <div>
-        <label asp-for="PetDescription"></label>
-        <textarea asp-for="PetDescription" rows="3" maxlength="200"></textarea>
-        <span asp-validation-for="PetDescription" class="text-danger"></span>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-success">Save</button>
-    </div>
-</form>
+    <form asp-controller="Pet" asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
+        <div>
+            <label asp-for="PetName"></label>
+            <input type="text" asp-for="PetName" />
+            <span asp-validation-for="PetName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="PetType"></label>
+            <select type="text" asp-for="PetType">
+                <option value="dog">dog</option>
+                <option value="cat">cat</option>
+                <option value="rabbit">rabbit</option>
+                <option value="snake">snake</option>
+                <option value="ferret">ferret</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="PetDescription"></label>
+            <textarea asp-for="PetDescription" rows="3" maxlength="200"></textarea>
+            <span asp-validation-for="PetDescription" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="file" asp-for="@Model.File" multiple />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </form>

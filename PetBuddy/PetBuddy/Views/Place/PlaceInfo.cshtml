@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model PlaceInfoViewModel
+@model ReviewViewModel
 
 @if (@Model.Place == null)
 {
@@ -11,11 +11,12 @@ else
 {
     <div>
         <div>
+            <img src="@Model.Place.PlaceUri"/>
             @Model.Place.Name
             @Model.Place.AverageRating
-            <a href="#">
+            @*<a href="#">
                 @Model.User.UserName
-            </a>
+            </a>*@
         </div>
         <div>
             <h5>Animals: </h5>
@@ -27,32 +28,59 @@ else
             <h5>Description: </h5>
             <p>@Model.Place.Description</p>
         </div>
-        <form asp-controller="Place" asp-action="Edit" asp-route-placeId="@Model.Place.PlaceId" method="get" class="my-btn">
-            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-        </form>
-        <div>
-            <div>
-                <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@Model.Place.PlaceId" method="post">
+        @if (Model.User != null && (Model.User.Id.Equals(Model.Place.UserId)))
+        {
+            <form asp-controller="Place" asp-action="Edit" asp-route-placeId="@Model.Place.PlaceId" method="get" class="my-btn">
+                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+            </form>
+        }
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Left a review on this place</h3>
+                <form asp-controller="Place" asp-action="PlaceReview" asp-route-placeId="@Model.Place.PlaceId" method="post">
                     <div class="form-group">
-                        <label asp-for="@Model.Review.Rating"></label>
-                        <select type="text" asp-for="@Model.Review.Rating">
+                        <label asp-for="@Model.Rating"></label>
+                        <select type="text" asp-for="@Model.Rating">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <span asp-validation-for="@Model.Review.Rating" class="text-danger"></span>
+                        <span asp-validation-for="@Model.Rating" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.Review.Text"></label>
-                        <textarea asp-for="@Model.Review.Text" class="form-control" rows="3" maxlength="200"></textarea>
-                        <span asp-validation-for="@Model.Review.Text" class="text-danger"></span>
+                        <label asp-for="@Model.Text"></label>
+                        <textarea asp-for="@Model.Text" class="form-control" rows="3" maxlength="200"></textarea>
+                        <span asp-validation-for="@Model.Text" class="text-danger"></span>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm">Send</button>
                     </div>
                 </form>
+            </div>
+            <div class="col-md-6">
+                @if (@Model.Place.Reviews.Count != 0)
+                {
+                    <table class="table">
+                        <tr>
+                            <th>Rating</th>
+                            <th>Review</th>
+                        </tr>
+                        @foreach (var review in @Model.Place.Reviews)
+                        {
+                            <tr>
+                                <td>@review.Rating</td>
+                                <td>@review.Text</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p><i>There is no rating yet.</i></p>
+                }
             </div>
         </div>
     </div>

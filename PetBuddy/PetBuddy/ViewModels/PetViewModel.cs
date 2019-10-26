@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetBuddy.ViewModels
 {
@@ -13,5 +14,6 @@ namespace PetBuddy.ViewModels
         [Required]
         [Display(Name = "Description")]
         public string PetDescription { get; set; }
+        public IFormFile File { get; set; }
     }
 }
