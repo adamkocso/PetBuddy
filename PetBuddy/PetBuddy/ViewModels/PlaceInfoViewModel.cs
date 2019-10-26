@@ -19,8 +19,8 @@ namespace PetBuddy.ViewModels
         public int Price { get; set; }
         [Required(ErrorMessage = "The Description field is required.")]
         public string Description { get; set; }
-        //[Required]
-        //public List<AnimalType> Animals { get; set; }
+        [Required]
+        public string PetType { get; set; }
         public string PlaceUri { get; set; }
         public List<string> ErrorMessages { get; set; } = new List<string>();
         public IFormFile File { get; set; }

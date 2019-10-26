@@ -72,6 +72,7 @@ namespace PetBuddy.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
+                    PetType = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     AverageRating = table.Column<double>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -199,18 +200,11 @@ namespace PetBuddy.Migrations
                     PetType = table.Column<string>(nullable: true),
                     PetDescription = table.Column<string>(nullable: true),
                     PetUri = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    PlaceId = table.Column<long>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pets", x => x.PetId);
-                    table.ForeignKey(
-                        name: "FK_Pets_Places_PlaceId",
-                        column: x => x.PlaceId,
-                        principalTable: "Places",
-                        principalColumn: "PlaceId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pets_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -244,12 +238,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7ede27c1-e216-42c1-96c9-37da63825f73", "18d83b9f-92f8-431a-9b1d-63a78bdd8353", "Admin", "ADMIN" });
+                values: new object[] { "a4275ec4-71a0-4d3a-b4fe-32319c7b56aa", "8625e89e-faf6-4695-9b90-d05a4615ca4e", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8577ef3b-3a86-49e1-92f5-1555aa5701cd", "8dfdbc4d-248d-4fb5-8274-3a4e981da370", "Guest", "GUEST" });
+                values: new object[] { "2890663c-ec5b-4ce8-85bb-c48c9c7f2db6", "a7d94ac4-5503-4042-846d-d468610b7c25", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -287,11 +281,6 @@ namespace PetBuddy.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pets_PlaceId",
-                table: "Pets",
-                column: "PlaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_UserId",
