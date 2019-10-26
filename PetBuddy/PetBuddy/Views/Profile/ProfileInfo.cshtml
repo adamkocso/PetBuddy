@@ -1,0 +1,48 @@
+﻿@model ProfileViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        @if (@Model.User.UserUri == null)
+        {
+            <img src="images/index.png" class="thumb"/>
+        }
+        else
+        {
+            <img src="@Model.User.UserUri" class="thumb"/>
+        }
+    </div>
+    <div class="col-md-9">
+        <p>@Model.User.UserName</p>
+        <p>@Model.User.City</p>
+        <p>@Model.User.Email</p>
+        <a class="btn btn-danger btn-sm" role="button">Edit</a>
+    </div>
+    @if (@Model.Pets != null)
+    {
+        @foreach (var pet in @Model.Pets)
+    {
+        <div class="card-body">
+            @if (@pet.PetUri == null)
+            {
+                <img src="images/default_pet.jpg" class="thumb"/>
+            }
+            else
+            {
+                <img src="@pet.PetUri" class="thumb"/>
+            }
+            <p>@pet.PetName</p>
+            <p>@pet.PetType</p>
+            <p>@pet.PetDescription</p>
+            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="EditPet" asp-route-petId="@pet.PetId" role="button">Edit</a>
+            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="DeletePet" asp-route-petId="@pet.PetId" role="button">Delete</a>
+        </div>
+    }
+    }
+    else
+    {
+        <p>NO PET</p>
+    }
+    <div class="card-body">
+        <h5 class="card-title"><a asp-controller="Pet" asp-action="NewPet">+ Add New Pet</a></h5>
+    </div>
+</div>

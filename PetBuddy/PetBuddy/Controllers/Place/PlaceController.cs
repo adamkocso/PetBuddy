@@ -78,11 +78,11 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri });
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price});
         }
 
         [HttpPost("/edit/{placeId}")]
-        public async Task<IActionResult> EditHotel(PlaceInfoViewModel editPlace, long placeId)
+        public async Task<IActionResult> Edit(PlaceInfoViewModel editPlace, long placeId)
         {
             if (ModelState.IsValid)
             {
