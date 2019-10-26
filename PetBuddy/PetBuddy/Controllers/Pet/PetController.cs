@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Controllers.Profile;
@@ -8,6 +9,7 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Pet
 {
+    [Authorize]
     public class PetController : Controller
     {
         

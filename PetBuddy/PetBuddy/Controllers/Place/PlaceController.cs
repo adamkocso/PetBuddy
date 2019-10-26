@@ -11,33 +11,57 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Place
 {
+    [Authorize]
     public class PlaceController : Controller
     {
         private readonly IPlaceService placeService;
         private readonly IImageService imageService;
         private readonly UserManager<User> userManager;
+        private readonly IReviewService reviewService;
 
-        public PlaceController(IPlaceService placeService, IImageService imageService, UserManager<User> userManager)
+        public PlaceController(IPlaceService placeService, IImageService imageService,
+            UserManager<User> userManager, IReviewService reviewService)
         {
             this.placeService = placeService;
             this.imageService = imageService;
             this.userManager = userManager;
+            this.reviewService = reviewService;
         }
-        [AllowAnonymous]
-        [HttpGet("/placeInfo")]
-        public async Task<IActionResult> PlaceInfo()
+
+        [HttpGet("/placeinfo/{placeId}")]
+        public async Task<IActionResult> PlaceInfo(long placeId)
+        {
+            var place = await placeService.FindPlaceByIdAsync(placeId);
+            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            return View(new ReviewViewModel { Place = place, User = currentUser });
+        }
+
+        [HttpGet("/myplace")]
+        public async Task<IActionResult> MyPlace()
         {
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
             if (currentUser.PlaceId != 0)
             {
                 var place = await placeService.FindPlaceByIdAsync(currentUser.PlaceId);
 
-                return View(new PlaceInfoViewModel
-                { User = currentUser, Place = place });
+                return View("PlaceInfo", new ReviewViewModel()
+                { Place = place, User = currentUser });
             }
 
-            return View(new PlaceInfoViewModel
-            { User = currentUser });
+            return View("PlaceInfo", new ReviewViewModel());
+        }
+
+        [HttpPost("/review/{placeId}")]
+        public async Task<IActionResult> PlaceReview(ReviewViewModel newReview, long placeId)
+        {
+            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            if (ModelState.IsValid)
+            {
+                await reviewService.AddReviewAsync(newReview, currentUser.Id, placeId);
+                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place", new { placeId });
+            }
+
+            return View("PlaceInfo", newReview);
         }
 
         [HttpGet("/addplace")]
@@ -47,7 +71,6 @@ namespace PetBuddy.Controllers.Place
             return View(new PlaceInfoViewModel());
         }
 
-        [Authorize(Roles = "Guest, Admin")]
         [HttpPost("/addplace")]
         public async Task<IActionResult> Add(PlaceInfoViewModel newPlace)
         {
@@ -77,7 +100,8 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri });
+
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price });
         }
 
         [HttpPost("/edit/{placeId}")]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
 using PetBuddy.Services;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.Controllers.HomeController
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IHomeService homeService;

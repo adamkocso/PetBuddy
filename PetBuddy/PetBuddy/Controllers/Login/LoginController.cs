@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
@@ -10,6 +11,7 @@ using PetBuddy.Viewmodels;
 
 namespace PetBuddy.Controllers.LoginController
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IUserService userService;
@@ -19,14 +21,18 @@ namespace PetBuddy.Controllers.LoginController
             this.userService = userService;
         }
 
-        [HttpGet("/")]
+        [Route("/")]
+        [Route("/Account/Login")]
+        [HttpGet]
         public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             return View(new LoginViewModel());
         }
 
-        [HttpPost("/")]
+        [Route("/")]
+        [Route("/Account/Login")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {

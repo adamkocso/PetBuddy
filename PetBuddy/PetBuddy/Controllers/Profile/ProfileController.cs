@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
@@ -7,6 +8,7 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Profile
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<User> userManager;
