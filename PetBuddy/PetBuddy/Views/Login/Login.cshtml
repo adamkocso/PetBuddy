@@ -16,18 +16,24 @@
                             <span class="text-danger">@error</span>
                         }
                     }
-                <div class="form-group">
-                    <label asp-for="Email" class="text-uppercase">Email</label>
-                    <input asp-for="Email" class="form-control">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="text-uppercase">Email</label>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Password" class="text-uppercase">Password</label>
-                        <input asp-for="Password" class="form-control" >
+                        <input asp-for="Password" class="form-control">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-check">
-                        <button asp-controller="Login" asp-action="Login" type="submit" class="btn btn-login float-right">Submit</button>
+                            <button asp-controller="Login" asp-action="Login" type="submit" class="btn btn-outline-info">Login</button>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <p>
+                            <a asp-action="Register" asp-controller="Register"> Register</a>
+                        </p>
                     </div>
                 </form>
             </div>
