@@ -8,7 +8,7 @@ namespace PetBuddy.Models
         public long PlaceId { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
-        public List<AnimalType> Animals { get; set; } = null;
+        public List<Pet> Pets { get; set; } = null;
         public int Price { get; set; }
         public double AverageRating { get; set; } = 0;
         public string Description { get; set; }

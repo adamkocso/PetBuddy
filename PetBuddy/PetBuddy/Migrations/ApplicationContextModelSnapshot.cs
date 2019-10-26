@@ -42,15 +42,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d51f7baa-69d4-4d2e-8150-788542db66ae",
-                            ConcurrencyStamp = "1febcc2b-7a11-41b7-acb0-b7c364a9ba5a",
+                            Id = "7ede27c1-e216-42c1-96c9-37da63825f73",
+                            ConcurrencyStamp = "18d83b9f-92f8-431a-9b1d-63a78bdd8353",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4af3179e-9b11-4330-af4c-9c46c9c866bb",
-                            ConcurrencyStamp = "221c2618-1bc4-4d78-bd17-15f1c76f04ca",
+                            Id = "8577ef3b-3a86-49e1-92f5-1555aa5701cd",
+                            ConcurrencyStamp = "8dfdbc4d-248d-4fb5-8274-3a4e981da370",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -151,8 +151,6 @@ namespace PetBuddy.Migrations
 
                     b.HasKey("AnimalTypeId");
 
-                    b.HasIndex("PlaceId");
-
                     b.ToTable("AnimalTypes");
                 });
 
@@ -169,9 +167,13 @@ namespace PetBuddy.Migrations
 
                     b.Property<string>("PetUri");
 
+                    b.Property<long?>("PlaceId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("PetId");
+
+                    b.HasIndex("PlaceId");
 
                     b.HasIndex("UserId");
 
@@ -323,16 +325,12 @@ namespace PetBuddy.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("PetBuddy.Models.AnimalType", b =>
-                {
-                    b.HasOne("PetBuddy.Models.Place")
-                        .WithMany("Animals")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("PetBuddy.Models.Pet", b =>
                 {
+                    b.HasOne("PetBuddy.Models.Place")
+                        .WithMany("Pets")
+                        .HasForeignKey("PlaceId");
+
                     b.HasOne("PetBuddy.Models.User")
                         .WithMany("Pets")
                         .HasForeignKey("UserId");

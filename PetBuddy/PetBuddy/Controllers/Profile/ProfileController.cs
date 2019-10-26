@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Differencing;
 using PetBuddy.Models;
 using PetBuddy.Services;
 using PetBuddy.ViewModels;
@@ -10,14 +12,14 @@ namespace PetBuddy.Controllers.Profile
     public class ProfileController : Controller
     {
         private readonly UserManager<User> userManager;
-        private readonly IPetService petService;
         private readonly IUserService userService;
+        private readonly IPetService petService;
 
         public ProfileController(UserManager<User> userManager, IPetService petService, IUserService userService)
         {
             this.userManager = userManager;
-            this.petService = petService;
             this.userService = userService;
+            this.petService = petService;
         }
 
         [HttpGet("/profile")]
@@ -35,6 +37,32 @@ namespace PetBuddy.Controllers.Profile
             var pets = await petService.MyPetsAsync(user);
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
             return View(new ProfileViewModel {User = user, Pets = pets, UserId = currentUser.Id});
+        }
+
+        [Authorize(Roles = "Guest, Admin")]
+        [HttpGet("/settings/{userId}")]
+        public async Task<IActionResult> EditProfile()
+        {
+            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            ViewBag.UserId = currentUser.Id;
+            return View(new EditProfileViewModel
+            {
+                City = currentUser.City,
+                Name = currentUser.UserName
+            });
+        }
+
+        [Authorize(Roles = "Guest, Admin")]
+        [HttpPost("/settings/{userId}")]
+        public async Task<IActionResult> EditProfile(EditProfileViewModel editProfile, string userId)
+        {
+            if (ModelState.IsValid)
+            {
+                await userService.SaveUserSettings(editProfile, userId);
+                return RedirectToAction(nameof(ProfileInfo));
+            }
+
+            return View(editProfile);
         }
     }
 }

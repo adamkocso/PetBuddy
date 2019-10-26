@@ -17,7 +17,7 @@
         <p>@Model.User.Email</p>
         @if (Model.User.Id == Model.UserId)
         {
-            <a class="btn btn-danger btn-sm" role="button">Edit</a>
+<a class="btn btn-danger btn-sm" role="button" asp-controller="Profile" asp-action="EditProfile" asp-route-userId="@Model.User.Id">Edit</a>
         }
     </div>
     @if (@Model.Pets != null)
@@ -48,7 +48,10 @@
     {
         <p>NO PET</p>
     }
-    <div class="card-body">
-        <h5 class="card-title"><a asp-controller="Pet" asp-action="NewPet">+ Add New Pet</a></h5>
-    </div>
+    @if (Model.User.Id == Model.UserId)
+    {
+        <div class="card-body">
+            <h5 class="card-title"><a asp-controller="Pet" asp-action="NewPet">+ Add New Pet</a></h5>
+        </div>
+    }
 </div>

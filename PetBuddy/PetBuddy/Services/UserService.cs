@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PetBuddy.ViewModels;
+
 
 namespace PetBuddy.Services
 {
@@ -65,9 +67,22 @@ namespace PetBuddy.Services
             return result;
         }
 
+        public async Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId)
+        {
+            if (editProfileViewModel.City != null && editProfileViewModel.Name != null )
+            {
+                var user = await applicationContext.Users.SingleOrDefaultAsync(p => p.Id == userId);
+                user.City = editProfileViewModel.City;
+                user.UserName = editProfileViewModel.Name;
+                applicationContext.Users.Update(user);
+                await applicationContext.SaveChangesAsync();
+            }
+        }
+
         public async Task AddUserToRoleAsync(User user)
         {
             await userManager.AddToRoleAsync(user, "Guest");
+
         }
 
         public async Task<User> FindByIdAsync(string userId)
