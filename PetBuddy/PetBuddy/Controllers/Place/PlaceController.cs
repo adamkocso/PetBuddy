@@ -34,7 +34,6 @@ namespace PetBuddy.Controllers.Place
             return View(new ReviewViewModel{Place = place, User = currentUser});
         }
         
-        
         [AllowAnonymous]
         [HttpGet("/myplace")]
         public async Task<IActionResult> MyPlace()

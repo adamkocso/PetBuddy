@@ -42,7 +42,6 @@ namespace PetBuddy.Services
             return newPlace.ErrorMessages;
         }
         
-        
         private bool CheckImageExtension(IFormFile file)
         {
             var fileNameSegments = file.FileName.Split(".");
