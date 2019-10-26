@@ -5,48 +5,40 @@
         <table>
             <form asp-controller="Home" asp-action="Home" method="get">
                 <div class="row">
-                    <tr>
-
-                        <td>
-                            <div class="form-group col-md-2">
-                                <div>
-                                    <label asp-for="@Model.QueryParams.City">City</label>
-                                    <select asp-for="@Model.QueryParams.City">
-                                        @foreach (var city in Model.Places)
-                                        {
-                                            <options>@city.City</options>
-                                        }
-                                    </select>
-                                </div>
+                <tr>
+                    <td>
+                        <div class="form-group col-md-2">
+                            <div>
+                                <label asp-for="@Model.QueryParams.City">City</label>
+                                <input asp-for="@Model.QueryParams.City" />
                             </div>
-                        </td>
-                        <td>
-                            <div class="form-group col-md-2">
-                                <div>
-                                    <label asp-for="@Model.QueryParams.Price">Price/day/animal</label>
-                                    <input asp-for="@Model.QueryParams.Price" />
-                                </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group col-md-2">
+                            <div>
+                                <label asp-for="@Model.QueryParams.Price">Price/day/animal</label>
+                                <input asp-for="@Model.QueryParams.Price" />
                             </div>
-                        </td>
-                        <td>
-                            <div class="form-group col-md-4">
-
-                                @*         <div> *@
-                                @*             <label asp-for="Type">Your pet's type</label> *@
-                                @*             <select asp-for=""> *@
-                                @*                 @foreach (var type in Model.Places) *@
-                                @*                 { *@
-                                @*                     <options value="@type.">Ide jon majd az animal type!!</options> *@
-                                @*                 } *@
-                                @*             </select> *@
-                                @*         </div> *@
-                                @* </div> *@
-                        </td>
-                </div>
-                <td>
-                    <button type="submit">Search</button>
-                </td>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@Model.QueryParams.PetType"></label>
+                            <select type="text" asp-for="@Model.QueryParams.PetType">
+                                <option value="dog">dog</option>
+                                <option value="cat">cat</option>
+                                <option value="rabbit">rabbit</option>
+                                <option value="snake">snake</option>
+                                <option value="ferret">ferret</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="submit">Search</button>
+                    </td>
                 </tr>
+                </div>
             </form>
         </table>
         <div class="row">
@@ -65,9 +57,13 @@
                                     <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
                                     <p class="card-text">
                                         <small class="text-muted">
-                                            @*@foreach (var animaltype in place.Animals)
-                                            {<p class="card-text">@animaltype</p>
-                                            }*@
+                                            @if (place.Pets != null)
+                                            {
+                                                @foreach (var pet in place.Pets)
+                                                {
+                                                    <p class="card-text">@pet.PetType</p>
+                                                }
+                                            }
                                         </small>
                                     </p>
                                     @if (place.Price == 0)
@@ -85,6 +81,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 }
