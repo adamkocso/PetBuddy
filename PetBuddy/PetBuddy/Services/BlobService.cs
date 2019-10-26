@@ -7,7 +7,6 @@ namespace PetBuddy.Services
 {
     public class BlobService : IBlobService
     {
-        //private readonly string blobContainerName;
         private CloudBlobClient blobClient;
         private CloudBlobContainer blobContainer;
         private string accessKey = string.Empty;

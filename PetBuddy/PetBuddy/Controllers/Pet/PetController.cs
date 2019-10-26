@@ -13,11 +13,16 @@ namespace PetBuddy.Controllers.Pet
         
         private readonly UserManager<User> userManager;
         private readonly IPetService petService;
+        private readonly IImageService imageService;
+        private readonly IPlaceService placeService;
 
-        public PetController(UserManager<User> userManager, IPetService petService)
+        public PetController(UserManager<User> userManager, IPetService petService, 
+            IImageService imageService, IPlaceService placeService)
         {
             this.userManager = userManager;
             this.petService = petService;
+            this.imageService = imageService;
+            this.placeService = placeService;
         }
 
         [HttpGet("/newpet")]
@@ -32,7 +37,14 @@ namespace PetBuddy.Controllers.Pet
             if (ModelState.IsValid)
             {
                 var currentUser = await userManager.GetUserAsync(HttpContext.User);
-                await petService.AddPetAsync(newPet, currentUser);
+                var petId = await petService.AddPetAsync(newPet, currentUser);
+
+                if (newPet.File != null)
+                {
+                    await imageService.UploadAsync(newPet.File, petId, "pet");
+                    await petService.SetIndexImageAsync(petId, "pet");
+                }
+
                 return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
             }
 
@@ -59,6 +71,11 @@ namespace PetBuddy.Controllers.Pet
             if (ModelState.IsValid)
             {
                 await petService.EditPetAsync(editPet, petId);
+                if (editPet.File != null)
+                {
+                    await imageService.UploadAsync(editPet.File, petId, "pet");
+                    await petService.SetIndexImageAsync(petId, "pet");
+                }
                 return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
             }
             

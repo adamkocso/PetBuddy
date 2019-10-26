@@ -16,7 +16,7 @@ namespace PetBuddy.Services
             this.imageService = imageService;
         }
 
-        public async Task AddPlaceAsync(PlaceInfoViewModel newPlace, User user)
+        public async Task<long> AddPlaceAsync(PlaceInfoViewModel newPlace, User user)
         {
             var city = newPlace.City;
             var description = newPlace.Description;
@@ -26,6 +26,8 @@ namespace PetBuddy.Services
             await applicationContext.SaveChangesAsync();
             user.PlaceId = place.Entity.PlaceId;
             await applicationContext.SaveChangesAsync();
+
+            return user.PlaceId;
         }
 
         public async Task EditPlaceAsync(long placeId, PlaceInfoViewModel editPlace)
@@ -48,6 +50,15 @@ namespace PetBuddy.Services
                 .SingleOrDefaultAsync(x => x.PlaceId == placeId);
 
             return foundPlace;
+        }
+
+        public async Task SetIndexImageAsync(long placeId, string blobContainerName)
+        {
+            var place = await FindPlaceByIdAsync(placeId);
+            var pictures = await imageService.ListAsync(placeId, blobContainerName);
+            place.PlaceUri = pictures[0].Path;
+            applicationContext.Places.Update(place);
+            await applicationContext.SaveChangesAsync();
         }
     }
 }

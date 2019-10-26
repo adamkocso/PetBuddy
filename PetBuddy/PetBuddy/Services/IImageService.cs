@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PetBuddy.Models;
+using PetBuddy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,8 @@ namespace PetBuddy.Services
 {
     public interface IImageService
     {
-        //List<string> Validate(IFormFileCollection files);
-        //Task UploadAsync(IFormFile file, long Id, string blobContainerName);
+        List<string> Validate(IFormFile file, PlaceInfoViewModel newPlace);
+        Task UploadAsync(IFormFile file, long Id, string blobContainerName);
+        Task<List<ImageDetails>> ListAsync(long placeId, string blobContainerName);
     }
 }
