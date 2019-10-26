@@ -9,6 +9,20 @@ namespace PetBuddy.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AnimalTypes",
+                columns: table => new
+                {
+                    AnimalTypeId = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Type = table.Column<string>(nullable: true),
+                    PlaceId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimalTypes", x => x.AnimalTypeId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -185,37 +199,24 @@ namespace PetBuddy.Migrations
                     PetType = table.Column<string>(nullable: true),
                     PetDescription = table.Column<string>(nullable: true),
                     PetUri = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    PlaceId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pets", x => x.PetId);
+                    table.ForeignKey(
+                        name: "FK_Pets_Places_PlaceId",
+                        column: x => x.PlaceId,
+                        principalTable: "Places",
+                        principalColumn: "PlaceId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pets_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AnimalTypes",
-                columns: table => new
-                {
-                    AnimalTypeId = table.Column<long>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(nullable: true),
-                    PlaceId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnimalTypes", x => x.AnimalTypeId);
-                    table.ForeignKey(
-                        name: "FK_AnimalTypes_Places_PlaceId",
-                        column: x => x.PlaceId,
-                        principalTable: "Places",
-                        principalColumn: "PlaceId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,17 +244,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f91db012-6b54-4c4a-b2ca-d67daf25f874", "a5ab18d1-6ced-4a78-bd55-c88b166ee765", "Admin", "ADMIN" });
+                values: new object[] { "b3304cbb-f51f-46ef-8592-d61b92147563", "f4365630-1662-40a1-ab26-448000e19be8", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "05c68490-9494-48db-a1d4-d6b16047b444", "d39a8f23-0b8f-4c39-81b6-031e8122a478", "Guest", "GUEST" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AnimalTypes_PlaceId",
-                table: "AnimalTypes",
-                column: "PlaceId");
+                values: new object[] { "d3d069d6-6019-4587-8181-0fc4c3b7f7c2", "a6b3a216-248e-485d-aeb9-aba0336cba7f", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -291,6 +287,11 @@ namespace PetBuddy.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pets_PlaceId",
+                table: "Pets",
+                column: "PlaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_UserId",

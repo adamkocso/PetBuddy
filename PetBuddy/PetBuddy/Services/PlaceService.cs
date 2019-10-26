@@ -44,7 +44,7 @@ namespace PetBuddy.Services
         }
         public async Task<Place> FindPlaceByIdAsync(long placeId)
         {
-            var foundPlace = await applicationContext.Places.Include(p => p.Animals).Include(p => p.Reviews)
+            var foundPlace = await applicationContext.Places.Include(p => p.Pets).Include(p => p.Reviews)
                 .SingleOrDefaultAsync(x => x.PlaceId == placeId);
 
             return foundPlace;

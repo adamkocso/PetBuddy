@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
 using PetBuddy.Services;
+using PetBuddy.Utils;
 using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.HomeController
@@ -21,9 +22,9 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpGet("/home")]
-        public async Task<IActionResult> Home()
+        public async Task<IActionResult> Home(QueryParams queryParams)
         {
-            var places = homeService.FindAllPlacesAsync();
+            var places = await homeService.FilterPlacesAsync(queryParams);
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
             ViewBag.UserId = currentUser.Id;
             return View(new HomeViewModel { Places = places });

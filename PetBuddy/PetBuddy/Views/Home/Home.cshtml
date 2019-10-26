@@ -8,29 +8,21 @@
             <div class="form-group col-md-2">
                 <div>
                     <label asp-for="@Model.QueryParams.City">City</label>
-                    <select asp-for="@Model.QueryParams.City">
-                        @foreach (var city in Model.Places)
-                        {
-                            <options>@city.City</options>
-                        }
-                    </select>
+                    <input asp-for="@Model.QueryParams.City" />
                 </div>
             </div>
-            @* ez meg itt nem mukodik majd ha kesz a many to many kapcsi :) <3  *@
-            @* a tobbi se tudom meg, hogy fog-e mukodni :'D  *@
-            @* *@
-            @* *@
-             @* <div class="form-group col-md-4"> *@
-            @*         <div> *@
-            @*             <label asp-for="Type">Your pet's type</label> *@
-            @*             <select asp-for=""> *@
-            @*                 @foreach (var type in Model.Places) *@
-            @*                 { *@
-            @*                     <options value="@type.">Ide jon majd az animal type!!</options> *@
-            @*                 } *@
-            @*             </select> *@
-            @*         </div> *@
-            @* </div> *@
+            <div class="form-group col-md-4"> 
+                 <div>
+                     <label asp-for="@Model.QueryParams.PetType"></label>
+                     <select type="text" asp-for="@Model.QueryParams.PetType">
+                         <option value="dog">dog</option>
+                         <option value="cat">cat</option>
+                         <option value="rabbit">rabbit</option>
+                         <option value="snake">snake</option>
+                         <option value="ferret">ferret</option>
+                     </select>
+                     </div>
+            </div> 
             <div class="form-group col-md-2">
                 <div>
                     <label asp-for="@Model.QueryParams.Price">Price/day/animal</label>
@@ -48,14 +40,17 @@
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         <div class="card-body">
-                            @*<h5 class="card-title">
-                                @Html.DisplayFor(modelItem => place.UserId + "'s place")
-                            </h5>*@
+                            <h5 class="card-title">
+                                @Html.DisplayFor(modelItem => place.Name)
+                            </h5>
                             <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
-                            @*@foreach (var animaltype in place.Animals)
+                            @if (place.Pets != null)
                             {
-                                <p class="card-text">@animaltype</p>
-                            }*@
+                                @foreach (var pet in place.Pets)
+                                {
+                                    <p class="card-text">@pet.PetType</p>
+                                }
+                            }
                             @if (place.Price == 0)
                             {
                                 <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
