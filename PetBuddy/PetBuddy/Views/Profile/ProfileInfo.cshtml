@@ -15,7 +15,7 @@
         <p>@Model.User.UserName</p>
         <p>@Model.User.City</p>
         <p>@Model.User.Email</p>
-        <a class="btn btn-danger btn-sm" role="button">Edit</a>
+        <a class="btn btn-danger btn-sm" role="button" asp-controller="Profile" asp-action="EditProfile" asp-route-userId="@Model.User.Id">Edit</a>
     </div>
     @if (@Model.Pets != null)
     {

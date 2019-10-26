@@ -5,10 +5,10 @@ namespace PetBuddy.ViewModels
 {
     public class EditProfileViewModel
     {
-        [Required(ErrorMessage = "Gimmi your name!")]
+        [Required(ErrorMessage = "Please provide your city!")]
         public string City { get; set; }
         
-        [Required(ErrorMessage = "Gimmi your city!")]
+        [Required(ErrorMessage = "Please provide your name!")]
         public string Name { get; set; }
         
     }
