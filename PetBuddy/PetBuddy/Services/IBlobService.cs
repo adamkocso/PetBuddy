@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.Services
 {
-    interface IBlobService
+    public interface IBlobService
     {
         Task<CloudBlobContainer> GetBlobContainer(string blobContainerName);
     }

@@ -243,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "51158d56-313a-4144-84b3-5488ed7dc084", "39b5f8b6-7a46-4d0b-95e9-f4eb485d180b", "Admin", "ADMIN" });
+                values: new object[] { "d51f7baa-69d4-4d2e-8150-788542db66ae", "1febcc2b-7a11-41b7-acb0-b7c364a9ba5a", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2b09bffb-f7d6-49ca-9f5b-02fbf92c592f", "bb57a468-00df-4b49-b9a3-258984d8d573", "Guest", "GUEST" });
+                values: new object[] { "4af3179e-9b11-4330-af4c-9c46c9c866bb", "221c2618-1bc4-4d78-bd17-15f1c76f04ca", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

@@ -1,6 +1,6 @@
 ﻿@model PlaceInfoViewModel
 
-    <form asp-controller="Place" asp-action="@ViewData["Action"]" method="post">
+    <form asp-controller="Place" asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -34,10 +34,10 @@
                 }
             }
             <div>
-                <input type="file" asp-for="@Model.PlaceUri" multiple />
+                <input type="file" asp-for="@Model.File" multiple />
             </div>
             <div>
-                <span asp-validation-for="@Model.PlaceUri" class="text-danger"></span>
+                <span asp-validation-for="@Model.File" class="text-danger"></span>
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-sm">@ViewData["Action"]</button>

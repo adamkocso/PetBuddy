@@ -45,7 +45,7 @@ namespace PetBuddy.Controllers.Place
                 var place = await placeService.FindPlaceByIdAsync(currentUser.PlaceId);
 
                 return View("PlaceInfo", new ReviewViewModel()
-                {Place = place });
+                {Place = place, User = currentUser});
             }
 
             return View("PlaceInfo", new ReviewViewModel());
@@ -78,8 +78,19 @@ namespace PetBuddy.Controllers.Place
             if (ModelState.IsValid)
             {
                 var currentUser = await userManager.GetUserAsync(HttpContext.User);
-                await placeService.AddPlaceAsync(newPlace, currentUser);
-                
+                var placeId = await placeService.AddPlaceAsync(newPlace, currentUser);
+
+                if (newPlace.File != null)
+                {
+                    var errors = imageService.Validate(newPlace.File, newPlace);
+                    if (errors.Count != 0)
+                    {
+                        return View(newPlace);
+                    }
+                    await imageService.UploadAsync(newPlace.File, placeId, "place");
+                    await placeService.SetIndexImageAsync(placeId, "place");
+                }
+
                 return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
             }
 
@@ -90,7 +101,7 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price});
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri });
         }
 
         [HttpPost("/edit/{placeId}")]
@@ -98,21 +109,23 @@ namespace PetBuddy.Controllers.Place
         {
             if (ModelState.IsValid)
             {
-                await placeService.EditPlaceAsync(placeId, editPlace);
-                //if (editPlace.Files != null)
-                //{
-                //    var errors = imageService.Validate(editPlace.PlaceUri, editPlace);
-                //    if (errors.Count != 0)
-                //    {
-                //        return View(editPlace);
-                //    }
+                {
+                    if (editPlace.File != null)
+                    {
+                        var errors = imageService.Validate(editPlace.File, editPlace);
+                        if (errors.Count != 0)
+                        {
+                            return View(editPlace);
+                        }
 
-                //    await imageService.UploadAsync(editPlace.PlaceUri, placeId);
-                //    await placeService.SetIndexImageAsync(placelId);
-                //}
-            return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
+                        await placeService.EditPlaceAsync(placeId, editPlace);
+                        await imageService.UploadAsync(editPlace.File, placeId, "place");
+                        await placeService.SetIndexImageAsync(placeId, "place");
+                    }
+
+                    return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
+                }
             }
-           
             return View(editPlace);
         }
     }
