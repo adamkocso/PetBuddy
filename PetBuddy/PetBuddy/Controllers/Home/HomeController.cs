@@ -15,22 +15,24 @@ namespace PetBuddy.Controllers.HomeController
         private readonly IHomeService homeService;
         private readonly IUserService userService;
 
-        public HomeController(IHomeService homeService)
+        public HomeController(IHomeService homeService, IUserService userService)
         {
             this.homeService = homeService;
+            this.userService = userService;
         }
 
-        [HttpGet("/")]
+        [HttpGet("/home")]
         public IActionResult Home()
         {
             var places = homeService.FindAllPlacesAsync();
             return View(new HomeViewModel { Places = places });
         }
-        [HttpPost("/logout")]
+
+        [HttpGet("/logout")]
         public async Task<IActionResult> Logout()
         {
             await userService.Logout();
-            return RedirectToAction(nameof(LoginController.Login), "Login");
+            return RedirectToAction(nameof(LoginController.LoginController.Login), "Login");
         }
     }
 }
