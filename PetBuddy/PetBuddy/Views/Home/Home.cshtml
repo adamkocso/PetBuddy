@@ -1,10 +1,11 @@
 @model PetBuddy.ViewModels.HomeViewModel
 
-    <div>
-        <h4>Find the best person for your darling:</h4>
-        <table>
-            <form asp-controller="Home" asp-action="Home" method="get">
-                <div class="row">
+
+<div>
+    <h4 class="Hometext">Find the best person for your darling</h4>
+    <table class="HomeTable">
+        <form asp-controller="Home" asp-action="Home" method="get">
+            <div class="row">
                 <tr>
                     <td>
                         <div class="form-group col-md-2">
@@ -34,57 +35,57 @@
                             </select>
                         </div>
                     </td>
-                    <td>
-                        <button type="submit">Search</button>
+                    <td >
+                        <div  class="HomeSearch"> <button class="btn btn-outline-info" type="submit">Search</button></div>
                     </td>
                 </tr>
-                </div>
-            </form>
-        </table>
-        <div class="row">
-            @if (Model != null)
+            </div>
+        </form>
+    </table>
+    <div class="row">
+        @if (Model != null)
+        {
+            @foreach (var place in Model.Places)
             {
-                @foreach (var place in Model.Places)
-                {
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="row no-gutters">
-                                <div class="img-square-wrapper">
-                                    <img class="thumb" src="~/images/default_pet.jpg" alt="Card image cap">
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="card-title">@*@Html.DisplayFor(modelItem => place.UserId + "'s place")*@</h4>
-                                    <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
-                                    <p class="card-text">
-                                        <small class="text-muted">
-                                            @if (place.Pets != null)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="img-square-wrapper">
+                                <img class="thumb" src="~/images/default_pet.jpg" alt="Card image cap">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">@*@Html.DisplayFor(modelItem => place.UserId + "'s place")*@</h4>
+                                <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        @if (place.Pets != null)
+                                        {
+                                            @foreach (var pet in place.Pets)
                                             {
-                                                @foreach (var pet in place.Pets)
-                                                {
-                                                    <p class="card-text">@pet.PetType</p>
-                                                }
-                                            }
+                                        <p class="card-text">@pet.PetType</p>
+                                    }
+                                        }
                                         </small>
-                                    </p>
-                                    @if (place.Price == 0)
-                                    {
-                                        <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
-                                    }
-                                    else
-                                    {
-                                        <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
-                                    }
-                                    <div class="menu-button">
-                                        <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
-                                            <button type="submit" class="btn btn-success">See More</button>
-                                        </form>
+                                        </p>
+                                        @if (place.Price == 0)
+                                        {
+                                            <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
+                                        }
+                                        <div class="menu-button">
+                                            <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
+                                                <button type="submit" class="btn btn-success">See More</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
-                }
-            }
-        </div>
+                    }
+        }
     </div>
+</div>
