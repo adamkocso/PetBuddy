@@ -11,7 +11,6 @@ namespace PetBuddy.Models
     {
         
         public string UserUri { get; set; }
-        [Required(ErrorMessage = "Please provide your city.")]
         public string City { get; set; }
         public List<Pet> Pets { get; set; }
         public long PlaceId { get; set; }

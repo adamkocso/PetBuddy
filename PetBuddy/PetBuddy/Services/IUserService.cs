@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PetBuddy.Models;
 using PetBuddy.Viewmodels;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PetBuddy.Services
         Task<List<string>> LoginAsync(LoginViewModel model);
         Task Logout();
         Task<IdentityResult> RegisterAsync(RegisterViewModel model);
-        Task SaveUserSettings(EditProfileViewModel editProfileViewModel);
+        Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId);
+        Task AddUserToRoleAsync(User user);
     }
 }

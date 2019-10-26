@@ -15,7 +15,6 @@ namespace PetBuddy.Services
         private readonly ApplicationContext applicationContext;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private IUserService _userServiceImplementation;
 
         public UserService(ApplicationContext applicationContext, UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -57,15 +56,31 @@ namespace PetBuddy.Services
             var user = new User {UserName = model.Username, Email = model.Email };
             var result = await userManager.CreateAsync(user, model.Password);
 
+            if (result.Succeeded)
+            {
+                await AddUserToRoleAsync(user);
+                return result;
+            }
+
             return result;
         }
 
-        public async Task SaveUserSettings(EditProfileViewModel editProfileViewModel)
+        public async Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId)
         {
-            var user = await applicationContext.Users.SingleOrDefaultAsync(p => p.Id == editProfileViewModel.User.Id);
-            user.City = editProfileViewModel.User.City;
-            user.UserName = editProfileViewModel.User.UserName;
-            await applicationContext.SaveChangesAsync();
+            if (editProfileViewModel.City != null && editProfileViewModel.Name != null )
+            {
+                var user = await applicationContext.Users.SingleOrDefaultAsync(p => p.Id == userId);
+                user.City = editProfileViewModel.City;
+                user.UserName = editProfileViewModel.Name;
+                applicationContext.Users.Update(user);
+                await applicationContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task AddUserToRoleAsync(User user)
+        {
+            await userManager.AddToRoleAsync(user, "Guest");
+
         }
     }
 }

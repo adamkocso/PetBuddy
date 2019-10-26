@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
@@ -19,10 +18,10 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpGet("/")]
-        public  IActionResult Home()
+        public IActionResult Home()
         {
             var places = homeService.FindAllPlacesAsync();
-            return View(new HomeViewModel {Places =  places} );
+            return View(new HomeViewModel { Places = places });
         }
     }
 }

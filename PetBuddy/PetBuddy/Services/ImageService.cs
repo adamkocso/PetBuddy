@@ -6,9 +6,9 @@ namespace PetBuddy.Services
 {
     public class ImageService : IImageService
     {
-        private readonly IBlobService blobService;
-        private int fourMegaByte = 4 * 1024 * 1024;
-        private readonly string[] validExtensions = { "jpg", "png", "jpeg" };
+        //private readonly IBlobService blobService;
+        //private int fourMegaByte = 4 * 1024 * 1024;
+        //private readonly string[] validExtensions = { "jpg", "png", "jpeg" };
 
         //public List<string> Validate(IFormFileCollection files)
         //{

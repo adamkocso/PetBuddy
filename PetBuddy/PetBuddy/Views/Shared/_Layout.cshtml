@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width-device-width" />
@@ -9,7 +12,7 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-<div class="container">
+<div >
     <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand" asp-action="Home" asp-controller="Home">
             <img src="~/images/logo2.png" height="60" width="60">

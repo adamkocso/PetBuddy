@@ -1,1 +1,59 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@model PlaceInfoViewModel
+
+@if (@Model.Place == null)
+{
+    <form asp-controller="Place" asp-action="Add" method="get">
+        <button type="submit" class="btn btn-success btn-sm">Add Place</button>
+    </form>
+}
+else
+{
+    <div>
+        <div>
+            @Model.Place.Name
+            @Model.Place.AverageRating
+            <a href="#">
+                @Model.User.UserName
+            </a>
+        </div>
+        <div>
+            <h5>Animals: </h5>
+            <p>@Model.Place.Animals</p>
+            <h5>Price/day/pet: </h5>
+            <p>@Model.Place.Price</p>
+            <h5>City: </h5>
+            <p>@Model.Place.City</p>
+            <h5>Description: </h5>
+            <p>@Model.Place.Description</p>
+        </div>
+        @* <form asp-controller="Place" asp-action="EditPlace" asp-route-HotelId="@Model.Place.PlaceId" method="get" class="my-btn"> *@
+        @*     <button type="submit" class="btn btn-primary btn-sm">Edit</button> *@
+        @* </form> *@
+        <div>
+            <div>
+                <form asp-controller="Place" asp-action="PlaceInfo" asp-route-hotelId="@Model.Place.PlaceId" method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.Review.Rating"></label>
+                        <select type="text" asp-for="@Model.Review.Rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <span asp-validation-for="@Model.Review.Rating" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Review.Text"></label>
+                        <textarea asp-for="@Model.Review.Text" class="form-control" rows="3" maxlength="200"></textarea>
+                        <span asp-validation-for="@Model.Review.Text" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

@@ -32,15 +32,25 @@ namespace PetBuddy.Controllers.Profile
         public async Task<IActionResult> EditProfile()
         {
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
-            return View(new EditProfileViewModel { User = currentUser });
+            ViewBag.UserId = currentUser.Id;
+            return View(new EditProfileViewModel
+            {
+                City = currentUser.City,
+                Name = currentUser.UserName
+            });
         }
 
         [Authorize(Roles = "Guest, Admin")]
         [HttpPost("/settings/{userId}")]
-        public async Task<IActionResult> EditProfile(EditProfileViewModel editProfile)
+        public async Task<IActionResult> EditProfile(EditProfileViewModel editProfile, string userId)
         {
-            userService.SaveUserSettings(editProfile);
-            return RedirectToAction(nameof(ProfileInfo));
+            if (ModelState.IsValid)
+            {
+                await userService.SaveUserSettings(editProfile, userId);
+                return RedirectToAction(nameof(ProfileInfo));
+            }
+
+            return View(editProfile);
         }
         
     }
