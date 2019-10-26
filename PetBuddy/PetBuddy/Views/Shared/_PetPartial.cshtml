@@ -1,30 +1,38 @@
 ﻿@model PetViewModel
 
-    <form asp-controller="Pet" asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
-        <div>
-            <label asp-for="PetName"></label>
-            <input type="text" asp-for="PetName"  />
-            <span asp-validation-for="PetName" class="text-danger"></span>
+<form asp-controller="Pet" asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h5><label class="card-title" asp-for="PetName"></label></h5>
+                        <input class="card-text" type="text" asp-for="PetName" />
+                        <span asp-validation-for="PetName" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <h5><label class="card-title" asp-for="PetType"></label></h5>
+                        <select class="card-text" type="text" asp-for="PetType">
+                            <option value="dog">dog</option>
+                            <option value="cat">cat</option>
+                            <option value="rabbit">rabbit</option>
+                            <option value="snake">snake</option>
+                            <option value="ferret">ferret</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h5><label class="card-title" asp-for="PetDescription"></label></h5>
+                        <textarea class="card-text" asp-for="PetDescription" rows="3" maxlength="200"></textarea>
+                        <span asp-validation-for="PetDescription" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input type="file" asp-for="@Model.File" multiple />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-outline-info">Save</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <label asp-for="PetType"></label>
-            <select type="text" asp-for="PetType">
-                <option value="dog">dog</option>
-                <option value="cat">cat</option>
-                <option value="rabbit">rabbit</option>
-                <option value="snake">snake</option>
-                <option value="ferret">ferret</option>
-            </select>
-        </div>
-        <div>
-            <label asp-for="PetDescription"></label>
-            <textarea asp-for="PetDescription" rows="3" maxlength="200"></textarea>
-            <span asp-validation-for="PetDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <input type="file" asp-for="@Model.File" multiple />
-        </div>
-        <div>
-            <button type="submit" class="btn btn-outline-info">Save</button>
-        </div>
-    </form>
+    </div>
+</form>

@@ -21,8 +21,9 @@ namespace PetBuddy.Services
             var city = newPlace.City;
             var description = newPlace.Description;
             var price = newPlace.Price;
+            var petType = newPlace.PetType;
 
-            var place = await applicationContext.Places.AddAsync(new Place { City = city, Price = price, Description = description, PlaceUri = null, UserId = user.Id });
+            var place = await applicationContext.Places.AddAsync(new Place { City = city, Price = price, Description = description, PetType = petType, PlaceUri = null, UserId = user.Id });
             await applicationContext.SaveChangesAsync();
             user.PlaceId = place.Entity.PlaceId;
             await applicationContext.SaveChangesAsync();
@@ -39,14 +40,14 @@ namespace PetBuddy.Services
                 placeEdit.City = editPlace.City;
                 placeEdit.Description = editPlace.Description;
                 placeEdit.PlaceUri = editPlace.PlaceUri;
-                //placeEdit.Animals = editPlace.Animals;
+                placeEdit.PetType = editPlace.PetType;
                 applicationContext.Places.Update(placeEdit);
                 await applicationContext.SaveChangesAsync();
             }
         }
         public async Task<Place> FindPlaceByIdAsync(long placeId)
         {
-            var foundPlace = await applicationContext.Places.Include(p => p.Pets).Include(p => p.Reviews)
+            var foundPlace = await applicationContext.Places.Include(p => p.Reviews)
                 .SingleOrDefaultAsync(x => x.PlaceId == placeId);
 
             return foundPlace;

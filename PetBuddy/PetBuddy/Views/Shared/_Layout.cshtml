@@ -18,7 +18,7 @@
         <nav class="navbar sticky-top navbar-light bg-light">
             <div class="container">
             <a class="navbar-brand" asp-action="Home" asp-controller="Home">
-                <img src="~/images/logo2.png" height="60" width="60">
+                <img src="~/images/logo.png" height="80" width="auto">
             </a>
         <div class="nav-item dropdown">
             <a class="navbar-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,7 +28,6 @@
                 <a class="dropdown-item" asp-controller="Home" asp-action="Home">Home page</a>
                 <a class="dropdown-item" asp-controller="Profile" asp-action="MyProfile">My profile</a>
                 <a class="dropdown-item" asp-controller="Place" asp-action="MyPlace">My place</a>
-                <a class="dropdown-item" href="#">Message</a>
                 <a class="dropdown-item" asp-controller="Profile" asp-action="EditProfile" asp-route-userId="@ViewBag.UserId">Settings</a>
                 <a class="dropdown-item" asp-controller="Home" asp-action="Logout">Logout</a>
             </div>

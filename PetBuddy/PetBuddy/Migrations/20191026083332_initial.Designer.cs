@@ -9,7 +9,7 @@ using PetBuddy;
 namespace PetBuddy.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191026072426_initial")]
+    [Migration("20191026083332_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "861a6239-3432-4196-ae65-7f5cfda3ebc0",
-                            ConcurrencyStamp = "c740fd03-9d26-45e4-b952-fb9ef411f6c5",
+                            Id = "c50ddff0-dd32-4208-8e44-b2abd8f2aa9a",
+                            ConcurrencyStamp = "0a60729c-b864-4e36-aaad-b44589328d69",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "40094a67-732c-4689-ae15-0e61f5bb4784",
-                            ConcurrencyStamp = "78da8e68-f6f0-44f0-b9bb-db18f0da8593",
+                            Id = "d0adc842-7117-42b1-932f-5ead731131ce",
+                            ConcurrencyStamp = "dc24c14c-9582-4e34-90a8-27f656dfb88f",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -169,13 +169,9 @@ namespace PetBuddy.Migrations
 
                     b.Property<string>("PetUri");
 
-                    b.Property<long?>("PlaceId");
-
                     b.Property<string>("UserId");
 
                     b.HasKey("PetId");
-
-                    b.HasIndex("PlaceId");
 
                     b.HasIndex("UserId");
 
@@ -194,6 +190,8 @@ namespace PetBuddy.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("PetType");
 
                     b.Property<string>("PlaceUri");
 
@@ -329,10 +327,6 @@ namespace PetBuddy.Migrations
 
             modelBuilder.Entity("PetBuddy.Models.Pet", b =>
                 {
-                    b.HasOne("PetBuddy.Models.Place")
-                        .WithMany("Pets")
-                        .HasForeignKey("PlaceId");
-
                     b.HasOne("PetBuddy.Models.User")
                         .WithMany("Pets")
                         .HasForeignKey("UserId");
