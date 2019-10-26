@@ -21,13 +21,14 @@ namespace PetBuddy.Controllers.HomeController
             this.userService = userService;
         }
 
-        [HttpGet("/")]
+        [HttpGet("/home")]
         public IActionResult Home()
         {
             var places = homeService.FindAllPlacesAsync();
             return View(new HomeViewModel { Places = places });
         }
-        [HttpPost("/logout")]
+
+        [HttpGet("/logout")]
         public async Task<IActionResult> Logout()
         {
             await userService.Logout();

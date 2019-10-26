@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetBuddy.Migrations
 {
-    public partial class @as : Migration
+    public partial class CreateInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -243,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "00264f9a-18e5-4f7e-b6f8-434dbac00162", "acb16d45-f9c8-4739-ae83-9efbde352c32", "Admin", "ADMIN" });
+                values: new object[] { "51158d56-313a-4144-84b3-5488ed7dc084", "39b5f8b6-7a46-4d0b-95e9-f4eb485d180b", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "955918a7-0b65-472f-88eb-a1de64b97769", "8c4e733c-3260-4752-a2bd-c7f94df217dd", "Guest", "GUEST" });
+                values: new object[] { "2b09bffb-f7d6-49ca-9f5b-02fbf92c592f", "bb57a468-00df-4b49-b9a3-258984d8d573", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

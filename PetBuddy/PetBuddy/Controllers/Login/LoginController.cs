@@ -19,15 +19,14 @@ namespace PetBuddy.Controllers.LoginController
             this.userService = userService;
         }
 
-        [HttpGet("/login")]
+        [HttpGet("/")]
         public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            await userService.Logout();
             return View(new LoginViewModel());
         }
 
-        [HttpPost("/login")]
+        [HttpPost("/")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
