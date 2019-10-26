@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PetBuddy.ViewModels;
+
 
 namespace PetBuddy.Services
 {
@@ -13,12 +16,15 @@ namespace PetBuddy.Services
         private readonly ApplicationContext applicationContext;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IImageService imageService;
 
-        public UserService(ApplicationContext applicationContext, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(ApplicationContext applicationContext, UserManager<User> userManager,
+            SignInManager<User> signInManager, IImageService imageService)
         {
             this.applicationContext = applicationContext;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.imageService = imageService;
         }
 
         public async Task<List<string>> LoginAsync(LoginViewModel model)
@@ -64,9 +70,37 @@ namespace PetBuddy.Services
             return result;
         }
 
+        public async Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId)
+        {
+            if (editProfileViewModel.City != null && editProfileViewModel.Name != null )
+            {
+                var user = await applicationContext.Users.SingleOrDefaultAsync(p => p.Id == userId);
+                user.City = editProfileViewModel.City;
+                user.UserName = editProfileViewModel.Name;
+                applicationContext.Users.Update(user);
+                await applicationContext.SaveChangesAsync();
+            }
+        }
+
         public async Task AddUserToRoleAsync(User user)
         {
             await userManager.AddToRoleAsync(user, "Guest");
+
+        }
+
+        public async Task<User> FindByIdAsync(string userId)
+        {
+            var user = await applicationContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return user;
+        }
+
+        public async Task SetIndexImageAsync(string userId, string blobContainerName)
+        {
+            var user = await FindByIdAsync(userId);
+            var pictures = await imageService.ListAsync(userId, blobContainerName);
+            user.UserUri = pictures[0].Path;
+            applicationContext.Users.Update(user);
+            await applicationContext.SaveChangesAsync();
         }
     }
 }

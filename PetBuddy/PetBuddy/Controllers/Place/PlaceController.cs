@@ -86,11 +86,11 @@ namespace PetBuddy.Controllers.Place
                     {
                         return View(newPlace);
                     }
-                    await imageService.UploadAsync(newPlace.File, placeId, "place");
+                    await imageService.UploadAsync(newPlace.File, placeId.ToString(), "place");
                     await placeService.SetIndexImageAsync(placeId, "place");
                 }
 
-                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+                return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
             }
 
             return View(newPlace);
@@ -117,10 +117,10 @@ namespace PetBuddy.Controllers.Place
                         return View(editPlace);
                     }
                     await placeService.EditPlaceAsync(placeId, editPlace);
-                    await imageService.UploadAsync(editPlace.File, placeId, "place");
+                    await imageService.UploadAsync(editPlace.File, placeId.ToString(), "place");
                     await placeService.SetIndexImageAsync(placeId, "place");
                 }
-                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+                return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
             }
            
             return View(editPlace);

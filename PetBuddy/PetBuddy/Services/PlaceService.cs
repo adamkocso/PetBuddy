@@ -46,7 +46,7 @@ namespace PetBuddy.Services
         }
         public async Task<Place> FindPlaceByIdAsync(long placeId)
         {
-            var foundPlace = await applicationContext.Places.Include(p => p.Animals).Include(p => p.Reviews)
+            var foundPlace = await applicationContext.Places.Include(p => p.Pets).Include(p => p.Reviews)
                 .SingleOrDefaultAsync(x => x.PlaceId == placeId);
 
             return foundPlace;
@@ -55,7 +55,7 @@ namespace PetBuddy.Services
         public async Task SetIndexImageAsync(long placeId, string blobContainerName)
         {
             var place = await FindPlaceByIdAsync(placeId);
-            var pictures = await imageService.ListAsync(placeId, blobContainerName);
+            var pictures = await imageService.ListAsync(placeId.ToString(), blobContainerName);
             place.PlaceUri = pictures[0].Path;
             applicationContext.Places.Update(place);
             await applicationContext.SaveChangesAsync();

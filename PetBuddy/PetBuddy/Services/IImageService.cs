@@ -11,7 +11,7 @@ namespace PetBuddy.Services
     public interface IImageService
     {
         List<string> Validate(IFormFile file, PlaceInfoViewModel newPlace);
-        Task UploadAsync(IFormFile file, long Id, string blobContainerName);
-        Task<List<ImageDetails>> ListAsync(long placeId, string blobContainerName);
+        Task UploadAsync(IFormFile file, string Id, string blobContainerName);
+        Task<List<ImageDetails>> ListAsync(string Id, string blobContainerName);
     }
 }

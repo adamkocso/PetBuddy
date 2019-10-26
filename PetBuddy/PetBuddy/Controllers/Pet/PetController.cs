@@ -43,11 +43,11 @@ namespace PetBuddy.Controllers.Pet
 
                 if (newPet.File != null)
                 {
-                    await imageService.UploadAsync(newPet.File, petId, "pet");
+                    await imageService.UploadAsync(newPet.File, petId.ToString(), "pet");
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
 
-                return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+                return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
             }
 
             return View(newPet);
@@ -57,7 +57,7 @@ namespace PetBuddy.Controllers.Pet
         public async Task<IActionResult> DeletePet(long petId)
         {
             await petService.DeletePetAsync(petId);
-            return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+            return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
         }
 
         [HttpGet("/editpet/{petId}")]
@@ -75,10 +75,10 @@ namespace PetBuddy.Controllers.Pet
                 await petService.EditPetAsync(editPet, petId);
                 if (editPet.File != null)
                 {
-                    await imageService.UploadAsync(editPet.File, petId, "pet");
+                    await imageService.UploadAsync(editPet.File, petId.ToString(), "pet");
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
-                return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+                return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
             }
             
             return View(editPet);

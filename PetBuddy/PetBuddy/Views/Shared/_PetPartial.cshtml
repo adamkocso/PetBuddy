@@ -3,7 +3,7 @@
     <form asp-controller="Pet" asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
         <div>
             <label asp-for="PetName"></label>
-            <input type="text" asp-for="PetName" />
+            <input type="text" asp-for="PetName"  />
             <span asp-validation-for="PetName" class="text-danger"></span>
         </div>
         <div>
@@ -25,6 +25,6 @@
             <input type="file" asp-for="@Model.File" multiple />
         </div>
         <div>
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-outline-info">Save</button>
         </div>
     </form>

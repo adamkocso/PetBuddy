@@ -64,7 +64,7 @@ namespace PetBuddy.Services
         public async Task SetIndexImageAsync(long petId, string blobContainerName)
         {
             var pet = await FindPetByIdAsync(petId);
-            var pictures = await imageService.ListAsync(petId, blobContainerName);
+            var pictures = await imageService.ListAsync(petId.ToString(), blobContainerName);
             pet.PetUri = pictures[0].Path;
             applicationContext.Pets.Update(pet);
             await applicationContext.SaveChangesAsync();

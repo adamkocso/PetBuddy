@@ -49,7 +49,7 @@ namespace PetBuddy.Services
             return extensions.Contains(fileNameSegments[fileNameSegments.Length - 1]);
         }
 
-        public async Task UploadAsync(IFormFile file, long Id, string blobContainerName)
+        public async Task UploadAsync(IFormFile file, string Id, string blobContainerName)
         {
             var blobcontainer = await blobService.GetBlobContainer(blobContainerName);
             var blob = blobcontainer.GetBlockBlobReference(Id + "/" + file.FileName);
@@ -59,7 +59,7 @@ namespace PetBuddy.Services
             }
         }
 
-        public async Task<List<ImageDetails>> ListAsync(long placeId, string blobContainerName)
+        public async Task<List<ImageDetails>> ListAsync(string placeId, string blobContainerName)
         {
             var imageList = new List<ImageDetails>();
             BlobContinuationToken blobContinuationToken = null;
@@ -74,26 +74,26 @@ namespace PetBuddy.Services
             return imageList;
         }
 
-        private async Task GetBlobDirectoryAsync(List<ImageDetails> imageList, long hotelId, string blobContainerName)
+        private async Task GetBlobDirectoryAsync(List<ImageDetails> imageList, string Id, string blobContainerName)
         {
             var blobContainer = await blobService.GetBlobContainer(blobContainerName);
             foreach (var item in blobContainer.ListBlobs())
             {
                 if (item is CloudBlobDirectory)
                 {
-                    GetImagesFromBlobs(item, imageList, hotelId);
+                    GetImagesFromBlobs(item, imageList, Id);
                 }
             }
         }
 
-        private void GetImagesFromBlobs(IListBlobItem item, List<ImageDetails> imageList, long hotelId)
+        private void GetImagesFromBlobs(IListBlobItem item, List<ImageDetails> imageList, string Id)
         {
             CloudBlobDirectory directory = (CloudBlobDirectory)item;
             IEnumerable<IListBlobItem> blobs = directory.ListBlobs(true);
             foreach (var blob in blobs)
             {
                 var folderId = GetFolders(blob.Uri);
-                if (hotelId == folderId)
+                if (Id == folderId)
                 {
                     imageList.Add(new ImageDetails
                     {
@@ -104,11 +104,11 @@ namespace PetBuddy.Services
             }
         }
 
-        private static int GetFolders(Uri uri)
+        private static string GetFolders(Uri uri)
         {
             var path = uri.ToString().Split("/");
             var folder = path[path.Length - 2];
-            return Convert.ToInt32(folder);
+            return folder;
         }
     }
 }

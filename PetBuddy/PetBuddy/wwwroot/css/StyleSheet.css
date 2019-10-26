@@ -1,10 +1,4 @@
 ﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
-html {
-}
-
-body {
-    background-color: beige !important;
-}
 
 .login-block {
     background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262); /* Chrome 10-25, Safari 5.1-6 */
@@ -40,12 +34,8 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    background-color: beige !important;
 }
 
-.bg-light {
-    background-color:beige !important;
-}
 
 .main-place-card {
     background: #fff;
