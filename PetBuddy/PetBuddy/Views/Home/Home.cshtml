@@ -50,14 +50,14 @@
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         <div class="card-body">
-                            <h5 class="card-title">
+                            @*<h5 class="card-title">
                                 @Html.DisplayFor(modelItem => place.UserId + "'s place")
-                            </h5>
+                            </h5>*@
                             <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
-                            @foreach (var animaltype in place.Animals)
+                            @*@foreach (var animaltype in place.Animals)
                             {
                                 <p class="card-text">@animaltype</p>
-                            }
+                            }*@
                             @if (place.Price == 0)
                             {
                                 <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>

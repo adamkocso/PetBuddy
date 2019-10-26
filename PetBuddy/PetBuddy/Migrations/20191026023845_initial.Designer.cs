@@ -9,7 +9,7 @@ using PetBuddy;
 namespace PetBuddy.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191026013302_initial")]
+    [Migration("20191026023845_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0f8e5f25-29a8-400e-8849-387a45b992ce",
-                            ConcurrencyStamp = "42d52885-d56a-4983-9784-4d53d098ff0d",
+                            Id = "6e08576f-278f-4a91-ab46-364158315d20",
+                            ConcurrencyStamp = "10ea1815-d20d-48e1-b6b0-b997b7571a42",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bc6367bf-d81a-4660-b874-e8f856335311",
-                            ConcurrencyStamp = "4e37af49-a657-42ad-9449-bbf394127889",
+                            Id = "cbdd7710-3861-4ff7-a109-b4d83bcda094",
+                            ConcurrencyStamp = "0ca98919-27ee-4141-b5e4-d036f9be0005",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
