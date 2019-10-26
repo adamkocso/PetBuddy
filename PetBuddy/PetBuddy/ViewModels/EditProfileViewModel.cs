@@ -10,6 +10,5 @@ namespace PetBuddy.ViewModels
         
         [Required(ErrorMessage = "Please provide your name!")]
         public string Name { get; set; }
-        
     }
 }

@@ -55,6 +55,5 @@ namespace PetBuddy.Controllers.Profile
 
             return View(editProfile);
         }
-        
     }
 }
