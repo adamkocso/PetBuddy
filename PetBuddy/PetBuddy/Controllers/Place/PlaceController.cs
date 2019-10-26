@@ -82,7 +82,7 @@ namespace PetBuddy.Controllers.Place
         }
 
         [HttpPost("/edit/{placeId}")]
-        public async Task<IActionResult> EditHotel(PlaceInfoViewModel editPlace, long placeId)
+        public async Task<IActionResult> Edit(PlaceInfoViewModel editPlace, long placeId)
         {
             if (ModelState.IsValid)
             {
