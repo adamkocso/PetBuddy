@@ -18,21 +18,9 @@
                     <td>
                         <div class="form-group col-md-2">
                             <div>
-                                <label asp-for="@Model.QueryParams.Price">Price/day/animal</label>
+                                <label asp-for="@Model.QueryParams.Price">Price/day/pet</label>
                                 <input asp-for="@Model.QueryParams.Price" />
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group col-md-4">
-                            <label asp-for="@Model.QueryParams.PetType"></label>
-                            <select type="text" asp-for="@Model.QueryParams.PetType">
-                                <option value="dog">dog</option>
-                                <option value="cat">cat</option>
-                                <option value="rabbit">rabbit</option>
-                                <option value="snake">snake</option>
-                                <option value="ferret">ferret</option>
-                            </select>
                         </div>
                     </td>
                     <td >
@@ -58,14 +46,8 @@
                                 <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        @if (place.Pets != null)
-                                        {
-                                            @foreach (var pet in place.Pets)
-                                            {
-                                        <p class="card-text">@pet.PetType</p>
-                                    }
-                                        }
-                                        </small>
+                                        @place.PetType
+                                    </small>
                                         </p>
                                         @if (place.Price == 0)
                                         {

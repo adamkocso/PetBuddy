@@ -13,11 +13,11 @@
                     <input type="text" asp-for="@Model.City" class="form-control">
                     <span asp-validation-for="@Model.City" class="text-danger"></span>
                 </div>
-                @*<div class="form-group">
-                    <label asp-for="@Model.Pets">"Pets"</label>
-                    <input type="text" asp-for="@Model.Pets" class="form-control">
-                    <span asp-validation-for="@Model.Pets" class="text-danger"></span>
-                </div>*@
+                <div class="form-group">
+                    <label asp-for="@Model.PetType"></label>
+                    <input type="text" asp-for="@Model.PetType" placeholder="Dog, cat, rabbit ..." class="form-control">
+                    <span asp-validation-for="@Model.PetType" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="@Model.Description">Description</label>
                     <input type="text" asp-for="@Model.Description" class="form-control">

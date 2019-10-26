@@ -38,10 +38,9 @@ namespace PetBuddy.Services
         public async Task<List<Place>> FilterPlacesAsync(QueryParams queryParam)
         {
             var places = await applicationContext.Places
-                .Include(p => p.Pets)
                 .Include(p => p.Reviews)
                 .Where(p => p.City.Contains(queryParam.City) || String.IsNullOrEmpty(queryParam.City))
-                .Where(p => p.Price == queryParam.Price || queryParam.Price == 0)
+                .Where(p => p.Price <= queryParam.Price || queryParam.Price == 0)
                 .OrderBy(p => p.AverageRating).ToListAsync();
             return places;
         }
