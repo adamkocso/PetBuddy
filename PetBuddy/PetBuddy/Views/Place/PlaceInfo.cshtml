@@ -10,13 +10,13 @@
 else
 {
     <div>
-        <div>
-            <img src="@Model.Place.PlaceUri"/>
+        <div>           
+            <img src="@Model.Place.PlaceUri" class="thumb" />
             @Model.Place.Name
             @Model.Place.AverageRating
             @*<a href="#">
-                @Model.User.UserName
-            </a>*@
+                    @Model.User.UserName
+                </a>*@
         </div>
         <div>
             <h5>Animals: </h5>
@@ -31,10 +31,10 @@ else
         @if (Model.User != null && (Model.User.Id.Equals(Model.Place.UserId)))
         {
             <form asp-controller="Place" asp-action="Edit" asp-route-placeId="@Model.Place.PlaceId" method="get" class="my-btn">
-                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                <button type="submit" class="btn btn-outline-info">Edit</button>
             </form>
         }
-        <hr/>
+        <hr />
         <div class="row">
             <div class="col-md-6">
                 <h3>Left a review on this place</h3>
@@ -56,7 +56,7 @@ else
                         <span asp-validation-for="@Model.Text" class="text-danger"></span>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                        <button type="submit" class="btn btn-outline-info">Send</button>
                     </div>
                 </form>
             </div>

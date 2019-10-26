@@ -12,10 +12,12 @@
         }
     </div>
     <div class="col-md-9">
-        <p>@Model.User.UserName</p>
-        <p>@Model.User.City</p>
+        <div class="name">
+            <h3>@Model.User.UserName</h3>
+        </div>
+        <h5>@Model.User.City</h5>
         <p>@Model.User.Email</p>
-        <a class="btn btn-danger btn-sm" role="button">Edit</a>
+        <a class="btn btn-outline-info" role="button">Edit</a>
     </div>
     @if (@Model.Pets != null)
     {
@@ -33,8 +35,8 @@
             <p>@pet.PetName</p>
             <p>@pet.PetType</p>
             <p>@pet.PetDescription</p>
-            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="EditPet" asp-route-petId="@pet.PetId" role="button">Edit</a>
-            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="DeletePet" asp-route-petId="@pet.PetId" role="button">Delete</a>
+            <a class="btn btn-outline-danger" asp-controller="Pet" asp-action="EditPet" asp-route-petId="@pet.PetId" role="button">Edit</a>
+            <a class="btn btn-outline-danger" asp-controller="Pet" asp-action="DeletePet" asp-route-petId="@pet.PetId" role="button">Delete</a>
         </div>
     }
     }
