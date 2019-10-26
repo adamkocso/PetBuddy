@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
 using PetBuddy.Viewmodels;
 
-namespace PetBuddy.Controllers.HomeController
+namespace PetBuddy.Controllers.LoginController
 {
     public class LoginController : Controller
     {
@@ -19,15 +19,14 @@ namespace PetBuddy.Controllers.HomeController
             this.userService = userService;
         }
 
-        [HttpGet("/login")]
+        [HttpGet("/")]
         public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            await userService.Logout();
             return View(new LoginViewModel());
         }
 
-        [HttpPost("/login")]
+        [HttpPost("/")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -36,7 +35,7 @@ namespace PetBuddy.Controllers.HomeController
                 var errors = await userService.LoginAsync(model);
                 if (errors.Count == 0)
                 {
-                    return RedirectToAction(nameof(HomeController.Home), "Home");
+                    return RedirectToAction(nameof(HomeController.HomeController.Home), "Home");
                 }
 
                 model.ErrorMessages = errors;

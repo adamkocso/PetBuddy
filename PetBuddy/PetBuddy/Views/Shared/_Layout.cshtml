@@ -12,22 +12,29 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-<div >
+    @if (SignInManager.IsSignedIn(User))
+    {
     <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand" asp-action="Home" asp-controller="Home">
-            <img src="~/images/logo2.png" height="60" width="60">
-        </a>
-        <select type="text" id="navigation">
-            <option value="home">Home page</option>
-            <option value="profile">My profile</option>
-            <option value="pets">My pets</option>
-            <option value="place">My place</option>
-            <option value="message">Messages</option>
-            <option value="settings">Settings</option>
-            <option value="logout">Logout</option>
-        </select>
+        <div class="container">
+            <a class="navbar-brand" asp-action="Home" asp-controller="Home">
+                <img src="~/images/logo2.png" height="60" width="60">
+            </a>
+            <div class="nav-item dropdown">
+                <a class="navbar-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" asp-controller="Home" asp-action="Home">Home page</a>
+                    <a class="dropdown-item" href="#">My profile</a>
+                    <a class="dropdown-item" asp-controller="Place" asp-action="PlaceInfo">My place</a>
+                    <a class="dropdown-item" href="#">Message</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout">Logout</a>
+                </div>
+            </div>
     </nav>
-    <div>
+    }
+    <div class="container-body">
             @RenderBody()
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
