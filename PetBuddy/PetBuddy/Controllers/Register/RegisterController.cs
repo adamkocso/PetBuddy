@@ -24,6 +24,7 @@ namespace PetBuddy.Controllers
         }
 
         [HttpPost("/register")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)

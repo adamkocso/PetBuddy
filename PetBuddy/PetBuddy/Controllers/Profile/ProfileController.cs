@@ -13,18 +13,21 @@ namespace PetBuddy.Controllers.Profile
     {
         private readonly UserManager<User> userManager;
         private readonly IUserService userService;
+        private readonly IPetService petService;
 
-        public ProfileController(UserManager<User> userManager, IUserService userService)
+        public ProfileController(UserManager<User> userManager, IUserService userService, IPetService petService)
         {
             this.userManager = userManager;
             this.userService = userService;
+            this.petService = petService;
         }
 
         [HttpGet("/profile")]
         public async Task<IActionResult> ProfileInfo()
         {
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
-            return View(currentUser);
+            var pets = await petService.MyPetsAsync(currentUser);
+            return View(new ProfileViewModel {User = currentUser, Pets = pets});
         }
 
         [Authorize(Roles = "Guest, Admin")]

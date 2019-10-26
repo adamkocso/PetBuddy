@@ -73,5 +73,35 @@ namespace PetBuddy.Controllers.Place
 
             return View(newPlace);
         }
+
+        [HttpGet("/edit/{placeId}")]
+        public async Task<IActionResult> Edit(long placeId)
+        {
+            var place = await placeService.FindPlaceByIdAsync(placeId);
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price});
+        }
+
+        [HttpPost("/edit/{placeId}")]
+        public async Task<IActionResult> Edit(PlaceInfoViewModel editPlace, long placeId)
+        {
+            if (ModelState.IsValid)
+            {
+                await placeService.EditPlaceAsync(placeId, editPlace);
+                //if (editPlace.Files != null)
+                //{
+                //    var errors = imageService.Validate(editPlace.PlaceUri, editPlace);
+                //    if (errors.Count != 0)
+                //    {
+                //        return View(editPlace);
+                //    }
+
+                //    await imageService.UploadAsync(editPlace.PlaceUri, placeId);
+                //    await placeService.SetIndexImageAsync(placelId);
+                //}
+            return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+            }
+           
+            return View(editPlace);
+        }
     }
 }

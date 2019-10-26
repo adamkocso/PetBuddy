@@ -42,15 +42,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "18b3037d-7d0b-40f2-8fc1-63a22f7acd85",
-                            ConcurrencyStamp = "e15ff8ee-db11-4597-8478-d7951dbc6a7b",
+                            Id = "f91db012-6b54-4c4a-b2ca-d67daf25f874",
+                            ConcurrencyStamp = "a5ab18d1-6ced-4a78-bd55-c88b166ee765",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "70751560-5e6f-452d-8a09-2ed4e698f3ac",
-                            ConcurrencyStamp = "2e89b54f-74b8-4308-98e9-ada287214263",
+                            Id = "05c68490-9494-48db-a1d4-d6b16047b444",
+                            ConcurrencyStamp = "d39a8f23-0b8f-4c39-81b6-031e8122a478",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

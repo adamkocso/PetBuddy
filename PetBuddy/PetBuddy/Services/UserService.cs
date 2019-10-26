@@ -51,6 +51,7 @@ namespace PetBuddy.Services
         {
             await signInManager.SignOutAsync();
         }
+
         public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
         {
             var user = new User {UserName = model.Username, Email = model.Email };

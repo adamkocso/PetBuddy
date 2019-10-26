@@ -1,9 +1,7 @@
 ﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 .login-block {
-    background: #DE6262; /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     float: left;
     width: 100%;
     padding: 50px 0;
@@ -20,7 +18,15 @@
 .container {
     background: #fff;
     border-radius: 10px;
-    box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+}
+
+.container-body {
+    width: 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .carousel-inner {
@@ -103,3 +109,8 @@
     .banner-text p {
         color: #fff;
     }
+
+.thumb {
+    width:200px;
+    height:200px;
+}
