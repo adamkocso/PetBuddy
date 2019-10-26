@@ -28,6 +28,7 @@ namespace PetBuddy.Controllers.HomeController
         }
 
         [HttpPost("/login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)

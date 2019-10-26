@@ -103,3 +103,8 @@
     .banner-text p {
         color: #fff;
     }
+
+.thumb {
+    width:200px;
+    height:200px;
+}

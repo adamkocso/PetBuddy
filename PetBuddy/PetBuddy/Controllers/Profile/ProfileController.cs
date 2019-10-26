@@ -2,23 +2,28 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
+using PetBuddy.Services;
+using PetBuddy.Viewmodels;
 
 namespace PetBuddy.Controllers.Profile
 {
     public class ProfileController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly IPetService petService;
 
-        public ProfileController(UserManager<User> userManager)
+        public ProfileController(UserManager<User> userManager, IPetService petService)
         {
             this.userManager = userManager;
+            this.petService = petService;
         }
 
         [HttpGet("/profile")]
         public async Task<IActionResult> ProfileInfo()
         {
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
-            return View(currentUser);
+            var pets = await petService.MyPetsAsync(currentUser);
+            return View(new ProfileViewModel {User = currentUser, Pets = pets});
         }
     }
 }
