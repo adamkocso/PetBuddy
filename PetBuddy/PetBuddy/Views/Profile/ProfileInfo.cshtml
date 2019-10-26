@@ -17,7 +17,7 @@
         </div>
         <h5>@Model.User.City</h5>
         <p>@Model.User.Email</p>
-        <a class="btn btn-outline-info" role="button">Edit</a>
+        <a class="btn btn-outline-info" role="button" asp-controller="Profile" asp-action="EditProfile" asp-route-userId="@Model.User.Id">Edit</a>
     </div>
     @if (@Model.Pets != null)
     {

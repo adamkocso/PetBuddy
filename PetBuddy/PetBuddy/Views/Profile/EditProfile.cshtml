@@ -1,0 +1,23 @@
+@model EditProfileViewModel
+
+<div>
+    <h2>@Model.Name's settings</h2>
+    <form asp-controller="Profile" asp-action="EditProfile" method="post" asp-route-userId="@ViewBag.UserId">
+        <div>
+            <label asp-for="@Model.Name"></label>
+            <input asp-for="@Model.Name"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.City"></label>
+            <input asp-for="@Model.City"/>
+            <span asp-validation-for="@Model.City" class="text-danger"></span>
+        </div>
+        @* Ityu itt majd kepcseree pliiiz!!!! koszikeeeee *@
+        @* <div> *@
+        @*     <label asp-for="@Model.User.UserUri"></label> *@
+        @*     <input asp-for="@Model.User.UserUri"/> *@
+        @* </div> *@
+        <button type="submit">Save changes</button>
+    </form>
+</div>

@@ -37,11 +37,9 @@ namespace PetBuddy.Controllers.LoginController
                 {
                     return RedirectToAction(nameof(HomeController.HomeController.Home), "Home");
                 }
-
                 model.ErrorMessages = errors;
                 return View(model);
             }
-
             return View(model);
         }
     }

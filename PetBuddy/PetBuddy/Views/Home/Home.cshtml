@@ -1,5 +1,6 @@
 @model PetBuddy.ViewModels.HomeViewModel
 
+
 <div>
     <h4>Find the best person for your darling:</h4>
     <table>
@@ -10,12 +11,7 @@
                         <div class="form-group col-md-2">
                             <div>
                                 <label asp-for="@Model.QueryParams.City">City</label>
-                                <select asp-for="@Model.QueryParams.City">
-                                    @foreach (var city in Model.Places)
-                                    {
-                                        <options>@city.City</options>
-                                    }
-                                </select>
+                                <input asp-for="@Model.QueryParams.City" />
                             </div>
                         </div>
                     </td>
@@ -29,23 +25,21 @@
                     </td>
                     <td>
                         <div class="form-group col-md-4">
-
-                            @*         <div> *@
-                            @*             <label asp-for="Type">Your pet's type</label> *@
-                            @*             <select asp-for=""> *@
-                            @*                 @foreach (var type in Model.Places) *@
-                            @*                 { *@
-                            @*                     <options value="@type.">Ide jon majd az animal type!!</options> *@
-                            @*                 } *@
-                            @*             </select> *@
-                            @*         </div> *@
+                            <label asp-for="@Model.QueryParams.PetType"></label>
+                            <select type="text" asp-for="@Model.QueryParams.PetType">
+                                <option value="dog">dog</option>
+                                <option value="cat">cat</option>
+                                <option value="rabbit">rabbit</option>
+                                <option value="snake">snake</option>
+                                <option value="ferret">ferret</option>
+                            </select>
                         </div>
                     </td>
+                    <td>
+                        <button class="btn btn-outline-info" type="submit">Search</button>
+                    </td>
+                </tr>
             </div>
-            <td>
-                <button type="submit">Search</button>
-            </td> 
-            </tr>
         </form>
     </table>
     <div class="row">
@@ -64,29 +58,34 @@
                                 <p class="card-text">@Html.DisplayFor(modelItem => place.City)</p>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        @*@foreach (var animaltype in place.Animals)
-                                            {<p class="card-text">@animaltype</p>
-                                            }*@
-                                    </small>
-                                </p>
-                                @if (place.Price == 0)
-                                {
-                                    <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
-                                }
-                                else
-                                {
-                                    <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
-                                }
-                                <div class="menu-button">
-                                    <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
-                                        <button type="submit" class="btn btn-success">See More</button>
-                                    </form>
+                                        @if (place.Pets != null)
+                                        {
+                                            @foreach (var pet in place.Pets)
+                                            {
+                                        <p class="card-text">@pet.PetType</p>
+                                    }
+                                        }
+                                        </small>
+                                        </p>
+                                        @if (place.Price == 0)
+                                        {
+                                            <p class="card-text"><small class="text-muted"><i>Unknown</i></small></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">@Html.DisplayFor(modelItem => place.Price)<span>$</span></p>
+                                        }
+                                        <div class="menu-button">
+                                            <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
+                                                <button type="submit" class="btn btn-success">See More</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
+                    }
         }
     </div>
 </div>
