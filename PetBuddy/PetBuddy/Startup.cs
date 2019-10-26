@@ -54,6 +54,7 @@ namespace PetBuddy
             services.AddTransient<IPetService, PetService>();
             services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
