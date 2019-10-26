@@ -16,12 +16,15 @@ namespace PetBuddy.Services
         private readonly ApplicationContext applicationContext;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IImageService imageService;
 
-        public UserService(ApplicationContext applicationContext, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(ApplicationContext applicationContext, UserManager<User> userManager,
+            SignInManager<User> signInManager, IImageService imageService)
         {
             this.applicationContext = applicationContext;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.imageService = imageService;
         }
 
         public async Task<List<string>> LoginAsync(LoginViewModel model)
@@ -89,6 +92,15 @@ namespace PetBuddy.Services
         {
             var user = await applicationContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
             return user;
+        }
+
+        public async Task SetIndexImageAsync(string userId, string blobContainerName)
+        {
+            var user = await FindByIdAsync(userId);
+            var pictures = await imageService.ListAsync(userId, blobContainerName);
+            user.UserUri = pictures[0].Path;
+            applicationContext.Users.Update(user);
+            await applicationContext.SaveChangesAsync();
         }
     }
 }

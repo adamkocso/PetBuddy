@@ -17,5 +17,6 @@ namespace PetBuddy.Services
         Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId);
         Task AddUserToRoleAsync(User user);
         Task<User> FindByIdAsync(string userId);
+        Task SetIndexImageAsync(string userId, string blobContainerName);
     }
 }

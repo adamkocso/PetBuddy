@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using PetBuddy.Models;
 
 namespace PetBuddy.ViewModels
@@ -10,5 +11,6 @@ namespace PetBuddy.ViewModels
         
         [Required(ErrorMessage = "Please provide your name!")]
         public string Name { get; set; }
+        public IFormFile File { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Services;
 using PetBuddy.Viewmodels;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetBuddy.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         private readonly IUserService userService;

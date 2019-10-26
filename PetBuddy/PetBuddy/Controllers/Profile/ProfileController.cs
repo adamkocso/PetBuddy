@@ -9,17 +9,21 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Profile
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly IUserService userService;
         private readonly IPetService petService;
+        private readonly IImageService imageService;
 
-        public ProfileController(UserManager<User> userManager, IPetService petService, IUserService userService)
+        public ProfileController(UserManager<User> userManager, IUserService userService,
+            IPetService petService, IImageService imageService)
         {
             this.userManager = userManager;
             this.userService = userService;
             this.petService = petService;
+            this.imageService = imageService;
         }
 
         [HttpGet("/profile")]
@@ -58,7 +62,12 @@ namespace PetBuddy.Controllers.Profile
         {
             if (ModelState.IsValid)
             {
-                await userService.SaveUserSettings(editProfile, userId);
+                if (editProfile.File != null)
+                {
+                    await userService.SaveUserSettings(editProfile, userId);
+                    await imageService.UploadAsync(editProfile.File, userId, "user");
+                    await userService.SetIndexImageAsync(userId, "user");
+                }
                 return RedirectToAction(nameof(ProfileInfo));
             }
 

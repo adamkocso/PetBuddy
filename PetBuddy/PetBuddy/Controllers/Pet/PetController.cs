@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Controllers.Profile;
@@ -8,6 +9,7 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Pet
 {
+    [Authorize]
     public class PetController : Controller
     {
         
@@ -41,7 +43,7 @@ namespace PetBuddy.Controllers.Pet
 
                 if (newPet.File != null)
                 {
-                    await imageService.UploadAsync(newPet.File, petId, "pet");
+                    await imageService.UploadAsync(newPet.File, petId.ToString(), "pet");
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
 
@@ -73,7 +75,7 @@ namespace PetBuddy.Controllers.Pet
                 await petService.EditPetAsync(editPet, petId);
                 if (editPet.File != null)
                 {
-                    await imageService.UploadAsync(editPet.File, petId, "pet");
+                    await imageService.UploadAsync(editPet.File, petId.ToString(), "pet");
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
                 return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");

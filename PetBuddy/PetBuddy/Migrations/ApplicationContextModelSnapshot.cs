@@ -14,7 +14,7 @@ namespace PetBuddy.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -42,15 +42,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ca1e117b-6559-4939-94c3-500dbc07d928",
-                            ConcurrencyStamp = "a787bbf3-ba0c-4aeb-830f-f4e50abc61ab",
+                            Id = "c50ddff0-dd32-4208-8e44-b2abd8f2aa9a",
+                            ConcurrencyStamp = "0a60729c-b864-4e36-aaad-b44589328d69",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f609cb85-b962-4a30-9382-a3271e080053",
-                            ConcurrencyStamp = "615dc40a-d98c-47eb-8980-1029f6d011ec",
+                            Id = "d0adc842-7117-42b1-932f-5ead731131ce",
+                            ConcurrencyStamp = "dc24c14c-9582-4e34-90a8-27f656dfb88f",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

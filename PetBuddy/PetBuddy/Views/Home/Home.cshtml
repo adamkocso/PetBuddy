@@ -23,6 +23,18 @@
                             </div>
                         </div>
                     </td>
+                    <td>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@Model.QueryParams.PetType"></label>
+                            <select type="text" asp-for="@Model.QueryParams.PetType">
+                                <option value="dog">dog</option>
+                                <option value="cat">cat</option>
+                                <option value="rabbit">rabbit</option>
+                                <option value="snake">snake</option>
+                                <option value="ferret">ferret</option>
+                            </select>
+                        </div>
+                    </td>
                     <td >
                         <div  class="HomeSearch"> <button class="btn btn-outline-info" type="submit">Search</button></div>
                     </td>
@@ -35,11 +47,19 @@
         {
             @foreach (var place in Model.Places)
             {
+
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card main-place-card">
                         <div class="row no-gutters">
                             <div class="img-square-wrapper">
-                                <img class="thumb" src="~/images/default_pet.jpg" alt="Card image cap">
+                                @if (place.PlaceUri == null)
+                                {
+                                    <img class="thumb" src="~/images/default_pet.jpg" alt="Card image cap">
+                                }
+                                else
+                                {
+                                    <img class="thumb" src="@place.PlaceUri" alt="Card image cap">
+                                }
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">@*@Html.DisplayFor(modelItem => place.UserId + "'s place")*@</h4>
@@ -59,7 +79,7 @@
                                         }
                                         <div class="menu-button">
                                             <form asp-controller="Place" asp-action="PlaceInfo" asp-route-placeId="@place.PlaceId" method="get">
-                                                <button type="submit" class="btn btn-success">See More</button>
+                                                <button type="submit" class="btn btn-outline-success">See More</button>
                                             </form>
                                         </div>
                                     </div>

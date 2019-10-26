@@ -11,6 +11,7 @@ using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Place
 {
+    [Authorize]
     public class PlaceController : Controller
     {
         private readonly IPlaceService placeService;
@@ -18,7 +19,8 @@ namespace PetBuddy.Controllers.Place
         private readonly UserManager<User> userManager;
         private readonly IReviewService reviewService;
 
-        public PlaceController(IPlaceService placeService, IImageService imageService, UserManager<User> userManager, IReviewService reviewService)
+        public PlaceController(IPlaceService placeService, IImageService imageService,
+            UserManager<User> userManager, IReviewService reviewService)
         {
             this.placeService = placeService;
             this.imageService = imageService;
@@ -31,10 +33,9 @@ namespace PetBuddy.Controllers.Place
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
-            return View(new ReviewViewModel{Place = place, User = currentUser});
+            return View(new ReviewViewModel { Place = place, User = currentUser });
         }
-        
-        [AllowAnonymous]
+
         [HttpGet("/myplace")]
         public async Task<IActionResult> MyPlace()
         {
@@ -44,7 +45,7 @@ namespace PetBuddy.Controllers.Place
                 var place = await placeService.FindPlaceByIdAsync(currentUser.PlaceId);
 
                 return View("PlaceInfo", new ReviewViewModel()
-                {Place = place, User = currentUser});
+                { Place = place, User = currentUser });
             }
 
             return View("PlaceInfo", new ReviewViewModel());
@@ -57,20 +58,19 @@ namespace PetBuddy.Controllers.Place
             if (ModelState.IsValid)
             {
                 await reviewService.AddReviewAsync(newReview, currentUser.Id, placeId);
-                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place", new {placeId});
+                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place", new { placeId });
             }
-            
+
             return View("PlaceInfo", newReview);
         }
 
         [HttpGet("/addplace")]
         public IActionResult Add()
         {
-            
+
             return View(new PlaceInfoViewModel());
         }
 
-        [Authorize(Roles = "Guest, Admin")]
         [HttpPost("/addplace")]
         public async Task<IActionResult> Add(PlaceInfoViewModel newPlace)
         {
@@ -86,7 +86,7 @@ namespace PetBuddy.Controllers.Place
                     {
                         return View(newPlace);
                     }
-                    await imageService.UploadAsync(newPlace.File, placeId, "place");
+                    await imageService.UploadAsync(newPlace.File, placeId.ToString(), "place");
                     await placeService.SetIndexImageAsync(placeId, "place");
                 }
 
@@ -108,24 +108,21 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(PlaceInfoViewModel editPlace, long placeId)
         {
             if (ModelState.IsValid)
-            {
+            { 
+                if (editPlace.File != null)
                 {
-                    if (editPlace.File != null)
+                    var errors = imageService.Validate(editPlace.File, editPlace);
+                    if (errors.Count != 0)
                     {
-                        var errors = imageService.Validate(editPlace.File, editPlace);
-                        if (errors.Count != 0)
-                        {
-                            return View(editPlace);
-                        }
-
-                        await placeService.EditPlaceAsync(placeId, editPlace);
-                        await imageService.UploadAsync(editPlace.File, placeId, "place");
-                        await placeService.SetIndexImageAsync(placeId, "place");
+                        return View(editPlace);
                     }
-
-                    return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
+                    await placeService.EditPlaceAsync(placeId, editPlace);
+                    await imageService.UploadAsync(editPlace.File, placeId.ToString(), "place");
+                    await placeService.SetIndexImageAsync(placeId, "place");
                 }
+                return RedirectToAction(nameof(PlaceController.MyPlace), "Place");
             }
+           
             return View(editPlace);
         }
     }
