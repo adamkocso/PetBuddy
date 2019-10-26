@@ -9,14 +9,14 @@ using PetBuddy;
 namespace PetBuddy.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191026051557_petbudy")]
-    partial class petbudy
+    [Migration("20191026053758_CreateInitial")]
+    partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -44,15 +44,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4bea22b-db40-4f95-ada4-ef8c022007c0",
-                            ConcurrencyStamp = "ce1e78a1-d338-44aa-94f4-4b4ffbb81406",
+                            Id = "7ede27c1-e216-42c1-96c9-37da63825f73",
+                            ConcurrencyStamp = "18d83b9f-92f8-431a-9b1d-63a78bdd8353",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "46a184cd-cd16-4bb3-a42f-37332e7dc86c",
-                            ConcurrencyStamp = "51b1c00d-ee18-4501-a273-2eb7f5b10002",
+                            Id = "8577ef3b-3a86-49e1-92f5-1555aa5701cd",
+                            ConcurrencyStamp = "8dfdbc4d-248d-4fb5-8274-3a4e981da370",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

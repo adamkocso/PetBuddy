@@ -13,10 +13,9 @@ else
         <div>
             <img src="@Model.Place.PlaceUri" class="thumb"/>
             @Model.Place.Name
-            @Model.Place.AverageRating
-            @*<a href="#">
-                @Model.User.UserName
-            </a>*@
+            <a asp-controller="Profile" asp-action="ProfileInfo" asp-route-userId="@Model.Place.UserId">
+                Owner
+            </a>
         </div>
         <div>
             <h5>Animals: </h5>

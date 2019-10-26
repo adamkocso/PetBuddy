@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PetBuddy.ViewModels;
 
+
 namespace PetBuddy.Services
 {
     public class UserService : IUserService
@@ -82,6 +83,12 @@ namespace PetBuddy.Services
         {
             await userManager.AddToRoleAsync(user, "Guest");
 
+        }
+
+        public async Task<User> FindByIdAsync(string userId)
+        {
+            var user = await applicationContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return user;
         }
     }
 }

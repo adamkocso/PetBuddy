@@ -16,5 +16,6 @@ namespace PetBuddy.Services
         Task<IdentityResult> RegisterAsync(RegisterViewModel model);
         Task SaveUserSettings(EditProfileViewModel editProfileViewModel, string userId);
         Task AddUserToRoleAsync(User user);
+        Task<User> FindByIdAsync(string userId);
     }
 }
