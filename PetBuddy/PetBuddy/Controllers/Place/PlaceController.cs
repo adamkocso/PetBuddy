@@ -54,19 +54,18 @@ namespace PetBuddy.Controllers.Place
             if (ModelState.IsValid)
             {
                 var currentUser = await userManager.GetUserAsync(HttpContext.User);
-                await placeService.AddPlaceAsync(newPlace, currentUser);
+                var placeId = await placeService.AddPlaceAsync(newPlace, currentUser);
 
-                //    if (newPlace.PlaceUri != null)
-                //    {
-                //        //    var errors = imageService.Validate(newPlace.PlaceUri, newPlace);
-                //        //    if (errors.Count != 0)
-                //        //    {
-                //        //        return View(newPlace);
-                //        //    }
-
-                //        //    await imageService.UploadAsync(newPlace.PlaceUri, placeId);
-                //        //await placeService.SetIndexImageAsync(placeId);
-                //        //}
+                if (newPlace.File != null)
+                {
+                    var errors = imageService.Validate(newPlace.File, newPlace);
+                    if (errors.Count != 0)
+                    {
+                        return View(newPlace);
+                    }
+                    await imageService.UploadAsync(newPlace.File, placeId, "place");
+                    await placeService.SetIndexImageAsync(placeId, "place");
+                }
 
                 return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
             }
@@ -78,27 +77,26 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price});
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri });
         }
 
         [HttpPost("/edit/{placeId}")]
-        public async Task<IActionResult> Edit(PlaceInfoViewModel editPlace, long placeId)
+        public async Task<IActionResult> EditHotel(PlaceInfoViewModel editPlace, long placeId)
         {
             if (ModelState.IsValid)
-            {
-                await placeService.EditPlaceAsync(placeId, editPlace);
-                //if (editPlace.Files != null)
-                //{
-                //    var errors = imageService.Validate(editPlace.PlaceUri, editPlace);
-                //    if (errors.Count != 0)
-                //    {
-                //        return View(editPlace);
-                //    }
-
-                //    await imageService.UploadAsync(editPlace.PlaceUri, placeId);
-                //    await placeService.SetIndexImageAsync(placelId);
-                //}
-            return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
+            { 
+                if (editPlace.File != null)
+                {
+                    var errors = imageService.Validate(editPlace.File, editPlace);
+                    if (errors.Count != 0)
+                    {
+                        return View(editPlace);
+                    }
+                    await placeService.EditPlaceAsync(placeId, editPlace);
+                    await imageService.UploadAsync(editPlace.File, placeId, "place");
+                    await placeService.SetIndexImageAsync(placeId, "place");
+                }
+                return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
             }
            
             return View(editPlace);
