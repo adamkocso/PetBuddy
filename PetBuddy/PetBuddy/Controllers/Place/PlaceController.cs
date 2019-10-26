@@ -78,7 +78,7 @@ namespace PetBuddy.Controllers.Place
         public async Task<IActionResult> Edit(long placeId)
         {
             var place = await placeService.FindPlaceByIdAsync(placeId);
-            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price});
+            return View(new PlaceInfoViewModel{ City = place.City, Description = place.Description, PlaceUri = place.PlaceUri, Price = place.Price });
         }
 
         [HttpPost("/edit/{placeId}")]
