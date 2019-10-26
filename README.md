@@ -3,7 +3,7 @@
 
 FedEx Project
 
-Contributors: Krisztina Földi, István Vágási, Ádám Kócsó, Horváth Péter
+Contributors: Krisztina Földi, István Vágási, Ádám Kócsó, Péter Horváth
 
 Project: PetBuddy is an application where you can find Petbuddies who can take care of your pets while you are traveling.
 
