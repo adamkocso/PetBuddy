@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Controllers.Profile;
 using PetBuddy.Models;
 using PetBuddy.Services;
-using PetBuddy.Viewmodels;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Pet
 {
@@ -46,20 +46,14 @@ namespace PetBuddy.Controllers.Pet
             return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
         }
 
-        [HttpGet("/edit/{petId}")]
+        [HttpGet("/editpet/{petId}")]
         public async Task<IActionResult> EditPet(long petId)
         {
             var pet = await petService.FindPetByIdAsync(petId);
-            var editpet = new PetViewModel
-            {
-                PetName = pet.PetName,
-                PetType = pet.PetType,
-                PetDescription = pet.PetDescription
-            };
-            return View(editpet);
+            return View(new PetViewModel {PetName = pet.PetName, PetType = pet.PetType, PetDescription = pet.PetDescription});
         }
 
-        [HttpPost("/edit/{petId}")]
+        [HttpPost("/editpet/{petId}")]
         public async Task<IActionResult> EditPet(PetViewModel editPet, long petId)
         {
             if (ModelState.IsValid)

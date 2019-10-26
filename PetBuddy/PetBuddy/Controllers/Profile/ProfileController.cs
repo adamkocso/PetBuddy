@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetBuddy.Models;
 using PetBuddy.Services;
-using PetBuddy.Viewmodels;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Controllers.Profile
 {

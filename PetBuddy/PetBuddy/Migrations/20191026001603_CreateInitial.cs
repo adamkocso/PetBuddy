@@ -56,9 +56,11 @@ namespace PetBuddy.Migrations
                 {
                     PlaceId = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     AverageRating = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     PlaceUri = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -241,12 +243,12 @@ namespace PetBuddy.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5c77fb8c-14b5-44b1-ad21-f0d2bbe61287", "cb2e6d0a-950c-4265-ad15-d5981be632f8", "Admin", "ADMIN" });
+                values: new object[] { "51158d56-313a-4144-84b3-5488ed7dc084", "39b5f8b6-7a46-4d0b-95e9-f4eb485d180b", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "38467d69-10b5-4641-8fdb-1751909be2cc", "392dad47-f547-4ae9-8096-d27e52b1fc73", "Guest", "GUEST" });
+                values: new object[] { "2b09bffb-f7d6-49ca-9f5b-02fbf92c592f", "bb57a468-00df-4b49-b9a3-258984d8d573", "Guest", "GUEST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimalTypes_PlaceId",

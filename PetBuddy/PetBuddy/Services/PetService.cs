@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PetBuddy.Models;
-using PetBuddy.Viewmodels;
+using PetBuddy.ViewModels;
 
 namespace PetBuddy.Services
 {

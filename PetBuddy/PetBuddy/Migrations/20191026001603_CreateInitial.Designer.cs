@@ -9,7 +9,7 @@ using PetBuddy;
 namespace PetBuddy.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191025191306_CreateInitial")]
+    [Migration("20191026001603_CreateInitial")]
     partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,15 @@ namespace PetBuddy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c77fb8c-14b5-44b1-ad21-f0d2bbe61287",
-                            ConcurrencyStamp = "cb2e6d0a-950c-4265-ad15-d5981be632f8",
+                            Id = "51158d56-313a-4144-84b3-5488ed7dc084",
+                            ConcurrencyStamp = "39b5f8b6-7a46-4d0b-95e9-f4eb485d180b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "38467d69-10b5-4641-8fdb-1751909be2cc",
-                            ConcurrencyStamp = "392dad47-f547-4ae9-8096-d27e52b1fc73",
+                            Id = "2b09bffb-f7d6-49ca-9f5b-02fbf92c592f",
+                            ConcurrencyStamp = "bb57a468-00df-4b49-b9a3-258984d8d573",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -188,6 +188,10 @@ namespace PetBuddy.Migrations
                     b.Property<double>("AverageRating");
 
                     b.Property<string>("City");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("PlaceUri");
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PetBuddy.Models;
 
-namespace PetBuddy.Viewmodels
+namespace PetBuddy.ViewModels
 {
     public class ProfileViewModel
     {

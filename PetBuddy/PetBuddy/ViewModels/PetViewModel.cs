@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PetBuddy.Viewmodels
+namespace PetBuddy.ViewModels
 {
     public class PetViewModel
     {
