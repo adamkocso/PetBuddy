@@ -40,13 +40,13 @@
                 <span asp-validation-for="@Model.File" class="text-danger"></span>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-sm">@ViewData["Action"]</button>
+        <button type="submit" class="btn btn-outline-info">@ViewData["Action"]</button>
         @if (@ViewData["Action"].Equals("Add"))
         {
-            <a class="btn btn-danger btn-sm" asp-controller="Home" asp-action="Home" role="button">Cancel</a>
+            <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Home" role="button">Cancel</a>
         }
         else
         {
-            <a class="btn btn-danger" asp-controller="Place" asp-action="MyPlace" role="button">Cancel</a>
+            <a class="btn btn-outline-danger" asp-controller="Place" asp-action="MyPlace" role="button">Cancel</a>
         }
     </form>
