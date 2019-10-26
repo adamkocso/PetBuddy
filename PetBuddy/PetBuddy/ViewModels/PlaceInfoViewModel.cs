@@ -1,4 +1,5 @@
-﻿using PetBuddy.Models;
+﻿using Microsoft.AspNetCore.Http;
+using PetBuddy.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,5 +23,6 @@ namespace PetBuddy.ViewModels
         //public List<AnimalType> Animals { get; set; }
         public string PlaceUri { get; set; }
         public List<string> ErrorMessages { get; set; } = new List<string>();
+        public IFormFile File { get; set; }
     }
 }

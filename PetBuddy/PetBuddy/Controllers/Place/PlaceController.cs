@@ -54,19 +54,18 @@ namespace PetBuddy.Controllers.Place
             if (ModelState.IsValid)
             {
                 var currentUser = await userManager.GetUserAsync(HttpContext.User);
-                await placeService.AddPlaceAsync(newPlace, currentUser);
 
-                //    if (newPlace.PlaceUri != null)
-                //    {
-                //        //    var errors = imageService.Validate(newPlace.PlaceUri, newPlace);
-                //        //    if (errors.Count != 0)
-                //        //    {
-                //        //        return View(newPlace);
-                //        //    }
-
-                //        //    await imageService.UploadAsync(newPlace.PlaceUri, placeId);
-                //        //await placeService.SetIndexImageAsync(placeId);
-                //        //}
+                if (newPlace.File != null)
+                {
+                    var errors = imageService.Validate(newPlace.File, newPlace);
+                    if (errors.Count != 0)
+                    {
+                        return View(newPlace);
+                    }
+                    var placeId = await placeService.AddPlaceAsync(newPlace, currentUser);
+                    await imageService.UploadAsync(newPlace.File, placeId, "place");
+                    await placeService.SetIndexImageAsync(placeId, "place");
+                }
 
                 return RedirectToAction(nameof(PlaceController.PlaceInfo), "Place");
             }
