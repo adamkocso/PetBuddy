@@ -14,5 +14,6 @@ namespace PetBuddy.Services
         Task Logout();
         Task<IdentityResult> RegisterAsync(RegisterViewModel model);
         Task AddUserToRoleAsync(User user);
+        Task<User> FindByIdAsync(string userId);
     }
 }

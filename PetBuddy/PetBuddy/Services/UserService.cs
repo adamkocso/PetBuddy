@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetBuddy.Services
 {
@@ -67,6 +68,12 @@ namespace PetBuddy.Services
         public async Task AddUserToRoleAsync(User user)
         {
             await userManager.AddToRoleAsync(user, "Guest");
+        }
+
+        public async Task<User> FindByIdAsync(string userId)
+        {
+            var user = await applicationContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return user;
         }
     }
 }

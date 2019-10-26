@@ -4,7 +4,7 @@
     <div class="col-md-3">
         @if (@Model.User.UserUri == null)
         {
-            <img src="images/index.png" class="thumb"/>
+            <img src="~/images/index.png" class="thumb"/>
         }
         else
         {
@@ -15,28 +15,34 @@
         <p>@Model.User.UserName</p>
         <p>@Model.User.City</p>
         <p>@Model.User.Email</p>
-        <a class="btn btn-danger btn-sm" role="button">Edit</a>
+        @if (Model.User.Id == Model.UserId)
+        {
+            <a class="btn btn-danger btn-sm" role="button">Edit</a>
+        }
     </div>
     @if (@Model.Pets != null)
     {
         @foreach (var pet in @Model.Pets)
-    {
-        <div class="card-body">
-            @if (@pet.PetUri == null)
-            {
-                <img src="images/default_pet.jpg" class="thumb"/>
-            }
-            else
-            {
-                <img src="@pet.PetUri" class="thumb"/>
-            }
-            <p>@pet.PetName</p>
-            <p>@pet.PetType</p>
-            <p>@pet.PetDescription</p>
-            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="EditPet" asp-route-petId="@pet.PetId" role="button">Edit</a>
-            <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="DeletePet" asp-route-petId="@pet.PetId" role="button">Delete</a>
-        </div>
-    }
+        {
+            <div class="card-body">
+                @if (@pet.PetUri == null)
+                {
+                    <img src="~/images/default_pet.jpg" class="thumb"/>
+                }
+                else
+                {
+                    <img src="@pet.PetUri" class="thumb"/>
+                }
+                <p>@pet.PetName</p>
+                <p>@pet.PetType</p>
+                <p>@pet.PetDescription</p>
+                @if (Model.User.Id == Model.UserId)
+                {
+                    <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="EditPet" asp-route-petId="@pet.PetId" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Pet" asp-action="DeletePet" asp-route-petId="@pet.PetId" role="button">Delete</a>
+                }
+            </div>
+        }
     }
     else
     {
