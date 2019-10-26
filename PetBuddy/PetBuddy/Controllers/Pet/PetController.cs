@@ -45,7 +45,7 @@ namespace PetBuddy.Controllers.Pet
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
 
-                return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+                return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
             }
 
             return View(newPet);
@@ -55,7 +55,7 @@ namespace PetBuddy.Controllers.Pet
         public async Task<IActionResult> DeletePet(long petId)
         {
             await petService.DeletePetAsync(petId);
-            return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+            return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
         }
 
         [HttpGet("/editpet/{petId}")]
@@ -76,7 +76,7 @@ namespace PetBuddy.Controllers.Pet
                     await imageService.UploadAsync(editPet.File, petId, "pet");
                     await petService.SetIndexImageAsync(petId, "pet");
                 }
-                return RedirectToAction(nameof(ProfileController.ProfileInfo), "Profile");
+                return RedirectToAction(nameof(ProfileController.MyProfile), "Profile");
             }
             
             return View(editPet);

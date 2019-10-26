@@ -15,7 +15,7 @@ namespace PetBuddy.Controllers.Profile
         private readonly IUserService userService;
         private readonly IPetService petService;
 
-        public ProfileController(UserManager<User> userManager, IUserService userService, IPetService petService)
+        public ProfileController(UserManager<User> userManager, IPetService petService, IUserService userService)
         {
             this.userManager = userManager;
             this.userService = userService;
@@ -23,11 +23,20 @@ namespace PetBuddy.Controllers.Profile
         }
 
         [HttpGet("/profile")]
-        public async Task<IActionResult> ProfileInfo()
+        public async Task<IActionResult> MyProfile()
         {
             var currentUser = await userManager.GetUserAsync(HttpContext.User);
             var pets = await petService.MyPetsAsync(currentUser);
-            return View(new ProfileViewModel {User = currentUser, Pets = pets});
+            return View("ProfileInfo", new ProfileViewModel {User = currentUser, Pets = pets, UserId = currentUser.Id});
+        }
+
+        [HttpGet("/profileinfo/{userId}")]
+        public async Task<IActionResult> ProfileInfo(string userId)
+        {
+            var user = await userService.FindByIdAsync(userId);
+            var pets = await petService.MyPetsAsync(user);
+            var currentUser = await userManager.GetUserAsync(HttpContext.User);
+            return View(new ProfileViewModel {User = user, Pets = pets, UserId = currentUser.Id});
         }
 
         [Authorize(Roles = "Guest, Admin")]

@@ -7,5 +7,6 @@ namespace PetBuddy.ViewModels
     {
         public User User { get; set; }
         public List<Pet> Pets { get; set; }
+        public string UserId { get; set; }
     }
 }

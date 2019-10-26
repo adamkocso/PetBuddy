@@ -124,3 +124,25 @@
 .name{
     padding-top:30px;
 }
+.Username{
+    text-align:right;
+    padding-left:500px;;
+}
+.Animal{
+    padding-top:30px;
+}
+.HomeTable{
+    margin-left:150px;
+}
+.HomeSearch{
+    margin-top:15px;
+}
+.Hometext{
+    font-family:'Freestyle Script';
+    font-size:60px;
+    text-align:center;
+    margin-top:15px;
+}
+.textfont{
+    font-family:'Freestyle Script';
+}
